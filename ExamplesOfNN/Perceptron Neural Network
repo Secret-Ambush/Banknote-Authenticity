@@ -1,0 +1,43 @@
+#Perceptron to learn AND logic gate
+def step_function(x):
+  return 1 if x >= 0 else 0
+
+def train_perceptron(inputs,labels,lr=0.1,epochs=4):
+  weights = [0,0]  #initialize weights to 0
+  bias = 0         #initialize bias to 0
+
+  for epoch in range(epochs):
+    print(f"Epoch {epoch+1}")
+    for i in range(len(inputs)):
+      x1,x2 = inputs[i]
+      y = labels[i]
+
+      #Weighted sum
+      linear_output = weights[0]*x1 + weights[1]*x2 + bias
+      prediction = step_function(linear_output)
+
+      #Perceptron rule
+      error = y - prediction
+      weights[0] += lr * error * x1
+      weights[1] += lr * error * x2
+      bias += lr * error
+
+      print(f" Input: {x1}, {x2} | Predicted: {prediction} | Target: {y} | Weights: {weights} | Bias: {bias}")
+
+  return weights,bias
+
+def predict(x1, x2, weights, bias):
+  output = weights[0]*x1 + weights[1]*x2 + bias
+  return step_function(output)
+
+#Dataset for AND gate
+inputs = [(0,0),(0,1),(1,0),(1,1)]
+labels = [0,0,0,1]
+
+#Train the perceptron
+weights, bias = train_perceptron(inputs,labels)
+
+#Test
+print("\nTesting Perceptron:")
+for x1,x2 in inputs:
+  print(f"Input: {x1}, {x2} => Output: {predict(x1,x2,weights,bias)}")

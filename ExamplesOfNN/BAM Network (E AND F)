@@ -1,0 +1,52 @@
+import numpy as np
+# Step 1: Define input patterns for 'E' and 'F' (5x3)
+# '*' -> 1, blank -> -1
+E = np.array([
+    [1, 1, 1],
+    [1, -1, -1],
+    [1, 1, 1],
+    [1, -1, -1],
+    [1, 1, 1]
+])
+
+F = np.array([
+    [1, 1, 1],
+    [1, -1, -1],
+    [1, 1, 1],
+    [1, -1, -1],
+    [1, -1, -1]
+])
+
+# Flatten into vectors (15 elements)
+X_E = E.reshape(15)
+X_F = F.reshape(15)
+
+# Step 2: Define target output vectors
+Y_E = np.array([-1, 1])   # for letter E
+Y_F = np.array([1, 1])    # for letter F
+
+# Step 3: Combine patterns into arrays
+X = np.vstack((X_E, X_F))
+Y = np.vstack((Y_E, Y_F))
+
+# Step 4: Compute weight matrix (Hebbian learning rule)
+W = np.zeros((15, 2))
+for i in range(len(X)):
+    W += np.outer(X[i], Y[i])
+
+print("Weight matrix (15x2):\n", W)
+
+# Step 5: Recall phase
+def bam_recall(x, W):
+    """Recall output Y from input X using BAM."""
+    y_in = np.dot(x, W)
+    y = np.sign(y_in)
+    return y
+
+
+
+# Test recall
+print("\nRecall Phase:")
+for i, label in enumerate(["E", "F"]):
+    y_recalled = bam_recall(X[i], W)
+    print(f"Input: {label} → Recalled Output: {y_recalled}")

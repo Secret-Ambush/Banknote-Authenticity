@@ -1,0 +1,71 @@
+from re import A
+import numpy as np
+
+#--------------------------------
+# Input and Target (OR Gate)
+#--------------------------------
+X = np.array([
+    [0,0],
+    [0,1],
+    [1,0],
+    [1,1]
+])
+y = np.array([-1,1,1,1])   #OR Gate output in bipolar form
+epochs = 20
+learning_rate = 0.1
+n_samples, n_features = X.shape
+
+#2 Adaline units in hidden layer
+w1 = np.random.randn(n_features)
+b1 = np.random.randn()
+w2 = np.random.randn(n_features)
+b2 = np.random.randn()
+
+#Output layer weights
+v = np.array([1,1])   # usually fixed to 1 for MADALINE Rule I
+
+for epoch in range(epochs):
+  print(f"Epoch {epoch+1}")
+  for xi, target in zip(X,y):
+    # Hidden layer outputs
+    z1 = np.dot(xi, w1) + b1
+    z2 = np.dot(xi, w2) + b2
+
+    a1 = 1 if z1 >= 0 else -1
+    a2 = 1 if z2 >= 0 else -1
+
+    # Output layer
+    output = np.sign(np.dot(v, [a1, a2]))
+
+    # If output is incorrect, adjust the Adaline whose output contributes most
+    if output != target:
+      if a1 != target:
+        error = target - a1
+        w1 += learning_rate * error * xi
+        b1 += learning_rate * error
+      elif a2 != target:
+        error = target - a2
+        w2 += learning_rate * error * xi
+        b2 += learning_rate * error
+
+    #Optionally display weights
+    print(f"w1: {w1}, b1: {b1}")
+    print(f"w2: {w2}, b2: {b2}")
+    print("-" * 30)
+
+#-------------------------------------
+#Prediction Function
+#-------------------------------------
+def predict(x):
+  z1 = np.dot(x,w1) + b1
+  z2 = np.dot(x,w2) + b2
+  a1 = 1 if z1 >=0 else -1
+  a2 = 1 if z2 >=0 else -1
+  return np.sign(np.dot(v, [a1,a2]))
+
+#------------------------------------
+# Test Predictions
+#------------------------------------
+print("\nFinal Predictions:")
+for xi in X:
+  print(f"Input: {xi} => Output: {predict(xi)}")

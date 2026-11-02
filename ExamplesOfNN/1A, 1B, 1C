@@ -1,0 +1,110 @@
+print("Input x=")
+x = float(input())
+
+print("Weight w=")
+w = float(input())
+
+print("Bias b=")
+b = float(input())
+
+yin = b + x * w
+if yin >= 0:
+  y = 1
+else:
+  y = 0
+print("Input x=",x)
+print("Weight w=",w)
+print("Bias b=",b)
+print("Net Input yin=",yin)
+print("Output y=",y)
+
+
+
+print("Enter the number of input nodes =")
+n = int(input())
+x=[]
+print("Enter the inputs=")
+for i in range(0,n):
+  e1 = float(input())
+  x.append(e1)
+
+w = []
+print("Enter the weights=")
+for i in range(0,n):
+  e2 = float(input())
+  w.append(e2)
+
+yin = []
+for i in range(0,n):
+  ele3 = (x[i]*w[i])
+  yin.append(ele3)
+fyin=round(sum(yin),3)    #fyin = finalyin
+
+#applying binary activation
+print("Binary Activation")
+if fyin >= 0:
+  y1 = 1
+else:
+  y1 = 0
+
+#applying bipolar activation
+print("Bipolar Activation")
+if fyin >= 0:
+  y2 =1
+else:
+  y2 = -1
+
+print("No of input nodes",n)
+print("Inputs=",x)
+print("Weights=",w)
+print("Net Input(yin)=",fyin)
+print("Output for Binary Activation(y1)=",y1)
+print("Output for Bipolar Activation(y2)=",y2)
+
+
+import math
+
+# Take number of inputs
+n = int(input("Enter the number of input nodes: "))
+
+# Take input values
+x = []
+print("Enter the input values:")
+for i in range(n):
+    val = float(input(f"x{i+1} = "))
+    x.append(val)
+
+# Take weight values
+w = []
+print("Enter the weight values:")
+for i in range(n):
+    wt = float(input(f"w{i+1} = "))
+    w.append(wt)
+
+# Take bias value
+bias = float(input("Enter the bias value: "))
+
+# Calculate net input (yin)
+yin = sum([x[i] * w[i] for i in range(n)]) + bias
+yin = round(yin, 3)
+
+# Binary Sigmoidal Activation
+def binary_sigmoid(yin):
+    return round(1 / (1 + math.exp(-yin)), 3)
+
+# Bipolar Sigmoidal Activation
+def bipolar_sigmoid(yin):
+    return round((2 / (1 + math.exp(-yin))) - 1, 3)
+
+# Apply activation functions
+binary_output = binary_sigmoid(yin)
+bipolar_output = bipolar_sigmoid(yin)
+
+# Display results
+print("\n--- Results ---")
+print("Inputs:", x)
+print("Weights:", w)
+print("Bias:", bias)
+print("Net Input (yin):", yin)
+print("Binary Sigmoidal Output:", binary_output)
+print("Bipolar Sigmoidal Output:", bipolar_output)

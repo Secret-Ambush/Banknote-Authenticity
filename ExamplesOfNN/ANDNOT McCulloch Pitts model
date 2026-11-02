@@ -1,0 +1,39 @@
+n = int(input("Enter the number of inputs="))
+print("For then",n,"inputs calculate the net input using yin=x1*w1+x2*w2")
+w1 = 1
+w2 = 1
+x1 = []
+x2 = []
+for i in range(0,n):
+  ele1 = float(input())
+  x1.append(ele1)
+for i in range(0,n):
+  ele2 = float(input())
+  x2.append(ele2)
+print("x1=",x1)
+print("x2=",x2)
+p=x1*w1
+m=x2*w2
+yin1=[]
+yin2=[]
+
+for i in range(0,n):
+  yin1.append(p[i]+m[i])
+print("yin1=",yin1)
+
+for i in range(0,n):
+  yin2.append(p[i]-m[i])
+print("yin2=",yin2)
+print("After assuming one weight exhibitory and other as inhibitory yin=",yin2)
+
+#activation function applied
+y=[]
+for i in range(0,n):
+  if(yin2[i]>=1):
+    ele=1
+    y.append(ele)
+
+  if(yin2[i]<1):
+    ele=0
+    y.append(ele)
+  print("Y=",y)

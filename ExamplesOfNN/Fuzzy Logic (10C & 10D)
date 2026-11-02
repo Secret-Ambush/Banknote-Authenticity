@@ -1,0 +1,88 @@
+#Simple fuzzy logic example (manual)
+
+#Input variables
+temperature = int(input("Enter the temperature")) #degrees celsius
+
+#Define fuzzy membership functions
+def cold(temp):
+  if temp <= 10:
+    return 1
+  elif 10 < temp < 20:
+    return (20 - temp)/10
+  else:
+    return 0
+
+def warm(temp):
+  if 15 < temp < 25:
+    return (temp - 15)/10
+  elif 25 <= temp <=35:
+    return (35 - temp)/10
+  else:
+    return 0
+
+def hot(temp):
+  if temp <= 25:
+    return 0
+  elif 25 < temp < 35:
+    return (temp-25)/10
+  else:
+    return 1
+
+#Calculate fuzzy values
+coldness = cold(temperature)
+warmness = warm(temperature)
+hotness = hot(temperature)
+
+#Display fuzzy membership degrees
+print(f"Temperature = {temperature}℃")
+print(f"Cold = {coldness:.2f}")
+print(f"Warm = {warmness:.2f}")
+print(f"Hot = {hotness:.2f}")
+
+
+# Step 1: Define fuzzy membership functions
+def cold(temp):
+    if temp <= 15:
+        return 1
+    elif 15 < temp < 25:
+        return (25 - temp) / 10
+    else:
+        return 0
+
+def warm(temp):
+    if 15 < temp < 25:
+        return (temp - 15) / 10
+    elif 25 <= temp <= 35:
+        return (35 - temp) / 10
+    else:
+        return 0
+
+def hot(temp):
+    if temp <= 25:
+        return 0
+    elif 25 < temp < 35:
+        return (temp - 25) / 10
+    else:
+        return 1
+
+# Step 2: Fuzzy rules
+# IF temperature is cold THEN fan is OFF
+# IF temperature is warm THEN fan is MEDIUM
+# IF temperature is hot THEN fan is HIGH
+
+def fan_speed(temp):
+    cold_level = cold(temp)
+    warm_level = warm(temp)
+    hot_level = hot(temp)
+
+    # Crisp output using weighted average (defuzzification)
+    # Fan speed: 0 = off, 50 = medium, 100 = high
+    speed = (cold_level * 0 + warm_level * 50 + hot_level * 100) / (cold_level + warm_level + hot_level)
+    return speed
+
+# Step 3: Test
+temperature = float(input("Enter temperature (°C): "))
+speed = fan_speed(temperature)
+
+print(f"Temperature: {temperature}°C")
+print(f"Recommended Fan Speed: {speed:.2f}%")

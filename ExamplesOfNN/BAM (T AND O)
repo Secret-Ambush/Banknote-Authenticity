@@ -1,0 +1,48 @@
+import numpy as np
+# Step 1: Define input patterns for 'T' and 'O' (4x3)
+# '*' -> 1, blank -> -1
+T = np.array([
+    [1, 1, 1],
+    [-1, 1, -1],
+    [-1, 1, -1],
+    [-1, 1, -1]
+])
+
+O = np.array([
+    [1, 1, 1],
+    [1, -1, 1],
+    [1, -1, 1],
+    [1, 1, 1]
+])
+
+# Step 2: Flatten into 12-element vectors
+X_T = T.reshape(12)
+X_O = O.reshape(12)
+
+# Step 3: Define target output vectors
+Y_T = np.array([1, -1])   # for letter T
+Y_O = np.array([1, 1])    # for letter O
+
+# Step 4: Combine input and output patterns
+X = np.vstack((X_T, X_O))
+Y = np.vstack((Y_T, Y_O))
+
+# Step 5: Compute weight matrix using Hebbian learning
+W = np.zeros((12, 2))
+for i in range(len(X)):
+    W += np.outer(X[i], Y[i])
+
+print("Weight matrix (12x2):\n", W)
+
+# Step 6: Recall function
+def bam_recall(x, W):
+    """Recall output Y from input X using BAM."""
+    y_in = np.dot(x, W)
+    y = np.sign(y_in)
+    return y
+
+# Step 7: Test recall
+print("\nRecall Phase:")
+for i, label in enumerate(["T", "O"]):
+    y_recalled = bam_recall(X[i], W)
+    print(f"Input: {label} → Recalled Output: {y_recalled}")
