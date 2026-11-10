@@ -1,0 +1,6 @@
+experiment_group,configuration_name,architecture,activation,swarm_size,max_evaluations,alpha,beta,gamma,delta,epsilon,informant_count,mean_train_accuracy,std_train_accuracy,mean_test_accuracy,std_test_accuracy,mean_test_precision,mean_test_recall,mean_test_f1_score,mean_execution_time_seconds
+architecture,ANN 1,"[4, 4, 1]",relu,20,1000,0.5,1.0,1.0,1.0,1.0,,0.996875,0.0,0.9927184466019418,0.0,0.9838709677419355,1.0,0.991869918699187,0.1591508330002398
+architecture,ANN 2,"[4, 8, 1]",relu,20,1000,0.5,1.0,1.0,1.0,1.0,,0.9979166666666667,0.0,0.9951456310679612,0.0,1.0,0.9890710382513661,0.9945054945054945,0.10850275000029797
+architecture,ANN 3,"[4, 16, 1]",relu,20,1000,0.5,1.0,1.0,1.0,1.0,,1.0,0.0,0.9975728155339806,0.0,1.0,0.994535519125683,0.9972602739726028,0.1072601669998221
+architecture,ANN 4,"[4, 8, 4, 1]",relu,20,1000,0.5,1.0,1.0,1.0,1.0,,1.0,0.0,0.9975728155339806,0.0,1.0,0.994535519125683,0.9972602739726028,0.11891779200004748
+architecture,ANN 5,"[4, 16, 8, 1]",relu,20,1000,0.5,1.0,1.0,1.0,1.0,,1.0,0.0,0.9975728155339806,0.0,1.0,0.994535519125683,0.9972602739726028,0.12541470900032436

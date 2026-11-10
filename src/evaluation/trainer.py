@@ -21,6 +21,12 @@ class PSOANNTrainer:
         *,
         swarm_size: int = 20,
         max_evaluations: int = 1_000,
+        alpha: float = 0.5,
+        beta: float = 1.0,
+        gamma: float = 1.0,
+        delta: float = 1.0,
+        epsilon: float = 1.0,
+        informant_count: int | None = None,
         seed: int | None = None,
         position_bounds: tuple[float, float] = (-1.0, 1.0),
     ) -> None:
@@ -34,6 +40,12 @@ class PSOANNTrainer:
             raise ValueError("y_train must be one-dimensional and match X_train's sample count.")
         self.swarm_size = swarm_size
         self.max_evaluations = max_evaluations
+        self.alpha = alpha
+        self.beta = beta
+        self.gamma = gamma
+        self.delta = delta
+        self.epsilon = epsilon
+        self.informant_count = informant_count
         self.seed = seed
         self.position_bounds = position_bounds
         self.optimiser: PSO | None = None
@@ -51,6 +63,12 @@ class PSOANNTrainer:
             dimensions=total_parameter_count(self.network),
             swarm_size=self.swarm_size,
             max_evaluations=self.max_evaluations,
+            alpha=self.alpha,
+            beta=self.beta,
+            gamma=self.gamma,
+            delta=self.delta,
+            epsilon=self.epsilon,
+            informant_count=self.informant_count,
             position_bounds=self.position_bounds,
             seed=self.seed,
         )
