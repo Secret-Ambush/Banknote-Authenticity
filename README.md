@@ -6,6 +6,14 @@ This MSc Artificial Intelligence coursework project will implement a configurabl
 
 The later coursework stages require a from-scratch ANN, a from-scratch informant-based PSO following Algorithm 39 in *Essentials of Metaheuristics*, and PSO-based optimisation of the complete ANN parameter vector. Framework ANN/PSO implementations are not permitted. See [the detailed requirements](docs/coursework_requirements.md).
 
+## UI screenshots
+
+Streamlit app displaying EDA and comparing model architectures and how configuration make a difference in the predictions
+
+![alt text](<Screenshots/Screenshot 2026-11-15 at 9.51.47 pm.png>)
+![alt text](Screenshots/image-1.png)
+![alt text](Screenshots/image.png)
+
 ## Structure
 
 ```
