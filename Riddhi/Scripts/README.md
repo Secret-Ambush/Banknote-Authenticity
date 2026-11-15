@@ -12,24 +12,48 @@ configuration can be selected to inspect its personal, informant, and global
 weights. These coefficient comparisons are not measured movement contributions;
 the saved results do not contain per-particle term histories.
 
+## Informant-enabled notebook PSO
+
+The notebook now adds an informant-best attraction to its personal-best and
+global-best terms. Set `c_informant` (strength) and `informant_count` (number,
+including self) in `BASE_PSO` or `REFINEMENT_PSO`. Each particle resamples
+distinct informants every iteration and follows their lowest-loss personal best.
+With attraction enabled the count must be between 1 and the swarm size.
+Screening uses strength 0.5 and count 3; refinement profiles use counts 3, 5 and 7
+alongside other setting changes, so they do not isolate the effect of count.
+Set `c_informant=0` to reproduce the original optimizer and random stream.
+
+Saved results from before this change are historical, not informant-enabled
+measurements. Run all notebook cells in order and refresh the named result
+bundles before claiming new results. Both hyperparameters are retained in each
+saved configuration. The dashboard reads those saved settings rather than
+assuming the new defaults were used.
+
+Run the focused checks from the workspace root:
+
+```bash
+python -m unittest discover -s Biologically-Inspired-Computation-Coursework/Riddhi/Scripts/tests -p 'test_notebook_pso.py' -v
+```
+
 From the workspace root, install the dashboard dependencies and launch it:
 
 ```bash
-python -m pip install -r Biologically-Inspired-Computation-Coursework/Scripts/Riddhi/requirements.txt
-python save_person_results.py
-streamlit run Biologically-Inspired-Computation-Coursework/Scripts/Riddhi/dashboard.py
+python -m pip install -r Biologically-Inspired-Computation-Coursework/Riddhi/Scripts/requirements.txt
+python Biologically-Inspired-Computation-Coursework/Riddhi/Scripts/save_person_results.py
+streamlit run Biologically-Inspired-Computation-Coursework/Riddhi/Scripts/dashboard.py
 ```
 
 The app reads the dataset from
 `Biologically-Inspired-Computation-Coursework/outline/data_banknote_authentication.txt`
 and experiment artifacts from paths anchored to the project, not the current
 working directory. Riddhi's model, predictions, and experiment are read from
-`Biologically-Inspired-Computation-Coursework/Scripts/ann_results/`.
+`Biologically-Inspired-Computation-Coursework/Riddhi/ann_results/`.
 Maazuddin's experiment groups are read from
 `Biologically-Inspired-Computation-Coursework/experiments/results/`, and the
-named comparison bundles are read from `ann_results/` at the workspace root.
-Run the workspace-root `save_person_results.py` again after changing either
-person's source results to refresh those bundles.
+named comparison bundles are read from `Riddhi/ann_results/` inside the project,
+with a fallback to `ann_results/` at the workspace root for older bundles.
+Run `Riddhi/Scripts/save_person_results.py` from the project root after changing
+either person's source results to refresh those bundles.
 
 The notebook results are labeled Riddhi; the other saved experiment groups are
 labeled Maazuddin. Their metrics use different evaluation protocols: the

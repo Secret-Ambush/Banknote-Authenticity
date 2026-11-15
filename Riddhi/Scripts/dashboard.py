@@ -202,6 +202,8 @@ def make_model_frame(results: list[dict]) -> pd.DataFrame:
                 "Activation": " → ".join(config["activations"][:-1]),
                 "Hidden layers": len(config["hidden"]),
                 "Parameters": result["parameters"],
+                "Informants": config.get("informant_count") if config.get("c_informant", 0) > 0 else 0,
+                "Informant coefficient": config.get("c_informant", 0.0),
                 "CV accuracy": result["mean_accuracy"],
                 "CV std": result["std_accuracy"],
                 "CV BCE": result["mean_bce"],
@@ -626,6 +628,7 @@ def show_test_tab(
 
 def show_pso_equations(experiment: dict, maazuddin: dict) -> None:
     config = experiment["best_config"]
+    informant_coefficient = config.get("c_informant", 0.0)
     st.markdown("#### How each person's swarm moves")
     st.markdown(
         "Each **particle** is a candidate ANN: its position **x** holds every weight and bias, "
@@ -649,10 +652,11 @@ def show_pso_equations(experiment: dict, maazuddin: dict) -> None:
 
     left, right = st.columns(2, gap="large")
     with left:
-        st.markdown("##### Riddhi · global-best inertia PSO")
+        st.markdown("##### Riddhi · personal / informant / global PSO")
         st.latex(
             r"v_{i,d}^{t+1}=w_t v_{i,d}^{t}"
             r"+c_1 r_{1,i,d}^{t}(p_{i,d}^{t}-x_{i,d}^{t})"
+            r"+c_{\mathrm{informant}} r_{3,i,d}^{t}(n_{i,d}^{t}-x_{i,d}^{t})"
             r"+c_2 r_{2,i,d}^{t}(g_d^{t}-x_{i,d}^{t})"
         )
         st.latex(r"x_{i,d}^{t+1}=x_{i,d}^{t}+v_{i,d}^{t+1}")
@@ -665,12 +669,26 @@ def show_pso_equations(experiment: dict, maazuddin: dict) -> None:
             f"- **Inertia:** decreases linearly from **{start:g}** to **{end:g}** "
             f"over **{config['iterations']}** velocity updates.\n"
             f"- **Personal/cognitive:** c₁ = **{config['c1']:g}**.\n"
-            f"- **Global/social:** c₂ = **{config['c2']:g}**; there is no separate informant term.\n"
-            "- Each random multiplier r₁ and r₂ is independently sampled from Uniform(0, 1) "
+            f"- **Global/social:** c₂ = **{config['c2']:g}**.\n"
+            f"- **Informant coefficient:** **{informant_coefficient:g}**.\n"
+            "- Each active random multiplier is independently sampled from Uniform(0, 1) "
             "per particle, coordinate and update.\n"
             "- These are the saved final settings, selected by CV accuracy, then BCE, then "
             "parameter count—not by test performance."
         )
+        if informant_coefficient > 0:
+            st.markdown(
+                f"- **Informants:** **{config['informant_count']}**, including self. "
+                "The others are resampled without replacement per particle and update; "
+                "the target is their lowest-loss personal best."
+            )
+        else:
+            st.warning(
+                "This saved run has no informant attraction. The notebook source now supports "
+                "c_informant and informant_count, but these historical results have not been "
+                "recomputed with the new settings. Rerun the notebook and refresh the named "
+                "result bundles to compare newly measured results."
+            )
         velocity_limit = 2 * config["bound"] * config["velocity_fraction"]
         st.caption(
             f"The implemented velocity is then clipped to ±{velocity_limit:g}; positions "
@@ -713,7 +731,7 @@ def show_pso_equations(experiment: dict, maazuddin: dict) -> None:
     expected = pd.DataFrame(
         [
             {"Person": "Riddhi", "Knowledge": "Personal", "Expected coefficient": config["c1"] / 2},
-            {"Person": "Riddhi", "Knowledge": "Informants", "Expected coefficient": 0.0},
+            {"Person": "Riddhi", "Knowledge": "Informants", "Expected coefficient": informant_coefficient / 2},
             {"Person": "Riddhi", "Knowledge": "Global", "Expected coefficient": config["c2"] / 2},
             {"Person": "Maazuddin", "Knowledge": "Personal", "Expected coefficient": profile["beta"] / 2},
             {"Person": "Maazuddin", "Knowledge": "Informants", "Expected coefficient": profile["gamma"] / 2},
@@ -736,14 +754,14 @@ def show_pso_equations(experiment: dict, maazuddin: dict) -> None:
         "Inertia is separate: it carries existing velocity, not a particular knowledge source."
     )
     st.markdown(
-        f"**Riddhi:** personal coefficient {config['c1']:g} versus global coefficient "
-        f"{config['c2']:g}. "
+        f"**Riddhi (saved run):** personal coefficient {config['c1']:g} versus combined "
+        f"informant/global coefficient {informant_coefficient + config['c2']:g}. "
         + (
             "The configured attraction favours individual experience."
-            if config["c1"] > config["c2"]
-            else "The configured attraction favours global knowledge."
-            if config["c2"] > config["c1"]
-            else "The two attraction coefficients are equal."
+            if config["c1"] > config["c2"] + informant_coefficient
+            else "The combined configured attraction favours shared knowledge."
+            if config["c2"] + informant_coefficient > config["c1"]
+            else "The personal and combined shared coefficient budgets are equal."
         )
     )
     st.markdown(
@@ -908,8 +926,8 @@ def main() -> None:
         riddhi_path = results_dir / "riddhi_results.json"
         maazuddin_path = find_file(
             [
-                WORKSPACE_ROOT / "ann_results/maazuddin_results.json",
                 SCRIPTS_DIR / "ann_results/maazuddin_results.json",
+                WORKSPACE_ROOT / "ann_results/maazuddin_results.json",
             ],
             "Maazuddin's saved experiment results",
         )
