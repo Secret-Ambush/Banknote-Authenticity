@@ -1,0 +1,3 @@
+experiment_group,configuration_name,architecture,activation,swarm_size,max_evaluations,alpha,beta,gamma,delta,epsilon,informant_count,mean_train_accuracy,std_train_accuracy,mean_test_accuracy,std_test_accuracy,mean_test_precision,mean_test_recall,mean_test_f1_score,mean_execution_time_seconds
+budget,Swarm 10,"[4, 8, 1]",relu,10,500,0.5,1.0,1.0,1.0,1.0,,0.9893749999999999,0.008615030470056384,0.9779126213592233,0.017889225884893913,0.9588787087566196,0.9939890710382514,0.9758734170011418,0.048987987599957705
+budget,Swarm 50,"[4, 8, 1]",relu,50,500,0.5,1.0,1.0,1.0,1.0,,0.9945833333333333,0.004413957939464053,0.9900485436893204,0.007454789320252063,0.9849672138684268,0.9928961748633881,0.9888629388048965,0.04787170860008701
