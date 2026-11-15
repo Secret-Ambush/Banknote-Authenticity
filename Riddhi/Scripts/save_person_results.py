@@ -6,8 +6,8 @@ from pathlib import Path
 from typing import Any
 
 
-ROOT = Path(__file__).resolve().parent
-COURSEWORK = ROOT / "Biologically-Inspired-Computation-Coursework"
+ROOT = Path(__file__).resolve().parents[1]
+COURSEWORK = ROOT.parent
 RESULTS_DIR = ROOT / "ann_results"
 MAAZUDDIN_RESULTS_DIR = COURSEWORK / "experiments" / "results"
 GROUPS = (
@@ -49,10 +49,7 @@ def read_csv_rows(path: Path) -> list[dict[str, Any]]:
 
 
 def find_riddhi_experiment() -> tuple[Path, dict[str, Any]]:
-    candidates = (
-        COURSEWORK / "Scripts" / "ann_results" / "experiment.json",
-        RESULTS_DIR / "experiment.json",
-    )
+    candidates = (RESULTS_DIR / "experiment.json",)
     for path in candidates:
         if path.is_file():
             return path, read_json(path)

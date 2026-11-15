@@ -21,13 +21,15 @@
       202,
       303
     ],
-    "selected_final_seed": 202,
+    "selected_final_seed": 101,
     "ranking": "Mean validation accuracy descending, BCE ascending, parameter count ascending.",
     "best_config": {
       "particles": 48,
       "iterations": 350,
       "c1": 1.7,
       "c2": 1.3,
+      "c_informant": 0.5,
+      "informant_count": 5,
       "inertia": [
         0.9,
         0.4
@@ -36,15 +38,17 @@
       "velocity_fraction": 0.15,
       "l2": 1e-05,
       "hidden": [
-        12
+        8,
+        4
       ],
       "activations": [
+        "relu",
         "relu",
         "logistic"
       ]
     },
     "selected_validation_accuracy": 1.0,
-    "selected_validation_bce": 0.00014142859942568376,
+    "selected_validation_bce": 5.912461877284565e-05,
     "architecture_results": [
       {
         "config": {
@@ -52,6 +56,8 @@
           "iterations": 180,
           "c1": 1.49618,
           "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
           "inertia": [
             0.7298,
             0.4
@@ -68,60 +74,60 @@
           ]
         },
         "parameters": 25,
-        "mean_accuracy": 0.9990714876888062,
-        "std_accuracy": 0.001438453457951333,
-        "mean_bce": 0.0020584821002870095,
+        "mean_accuracy": 0.999537037037037,
+        "std_accuracy": 0.0011340230290662822,
+        "mean_bce": 0.0035948621279805887,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
             "accuracy": 0.9972222222222222,
-            "bce": 0.004824623765536363,
-            "training_cost": 0.0011791580687888152,
+            "bce": 0.01658436104632279,
+            "training_cost": 0.0010621923420460289,
             "evaluations": 5792
           },
           {
             "fold": 1,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.00224269934075423,
-            "training_cost": 0.0012058179406976854,
+            "bce": 0.0015528176824168949,
+            "training_cost": 0.0010973279880093006,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.00013988375271151678,
-            "training_cost": 0.001228595421817114,
+            "bce": 0.00020135316836364305,
+            "training_cost": 0.0012522144193488182,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.00037405425811506455,
-            "training_cost": 0.0012206636835112136,
+            "bce": 0.0002442818102683678,
+            "training_cost": 0.00120276406489227,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 11,
-            "accuracy": 0.9972067039106145,
-            "bce": 0.003169443467052508,
-            "training_cost": 0.0016689431906315145,
+            "accuracy": 1.0,
+            "bce": 0.0026317406272771755,
+            "training_cost": 0.00170942243346282,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.0016001880175523775,
-            "training_cost": 0.002465069938266444,
+            "bce": 0.0003546184332346585,
+            "training_cost": 0.0011562664996871163,
             "evaluations": 5792
           }
         ],
-        "seconds": 1.3162465830000656
+        "seconds": 1.6195129159987118
       },
       {
         "config": {
@@ -129,6 +135,8 @@
           "iterations": 180,
           "c1": 1.49618,
           "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
           "inertia": [
             0.7298,
             0.4
@@ -147,58 +155,58 @@
         "parameters": 25,
         "mean_accuracy": 1.0,
         "std_accuracy": 0.0,
-        "mean_bce": 0.0006341281728676137,
+        "mean_bce": 0.0005329037802650304,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.0024378516613900573,
-            "training_cost": 0.000951093626359277,
+            "bce": 0.0014533438895164643,
+            "training_cost": 0.0008516591399577244,
             "evaluations": 5792
           },
           {
             "fold": 1,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.0005540187899837565,
-            "training_cost": 0.0008328435758994578,
+            "bce": 0.0009851560617246968,
+            "training_cost": 0.0009243837617359949,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.00011672082527493696,
-            "training_cost": 0.0008509998727923222,
+            "bce": 0.0002478472011979221,
+            "training_cost": 0.0009904234807203232,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.0004881006034093679,
-            "training_cost": 0.0010756859546285677,
+            "bce": 7.23999920983446e-05,
+            "training_cost": 0.0008743006846705632,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.00011452840990278896,
-            "training_cost": 0.0011576918845022728,
+            "bce": 0.0001506988079116044,
+            "training_cost": 0.0008437884630153216,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 9.35487472447748e-05,
-            "training_cost": 0.0010041704528416882,
+            "bce": 0.00028797672914114976,
+            "training_cost": 0.0007349562621940593,
             "evaluations": 5792
           }
         ],
-        "seconds": 1.0288549999995666
+        "seconds": 1.4059072500003822
       },
       {
         "config": {
@@ -206,6 +214,8 @@
           "iterations": 180,
           "c1": 1.49618,
           "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
           "inertia": [
             0.7298,
             0.4
@@ -222,60 +232,60 @@
           ]
         },
         "parameters": 25,
-        "mean_accuracy": 0.9976774260293814,
-        "std_accuracy": 0.0021013574130233676,
-        "mean_bce": 0.008814506327609543,
+        "mean_accuracy": 0.9986085247258432,
+        "std_accuracy": 0.0015242953241986414,
+        "mean_bce": 0.008944603281923254,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
             "accuracy": 0.9972222222222222,
-            "bce": 0.008054507997738396,
-            "training_cost": 0.005428485034121225,
+            "bce": 0.016735380312230368,
+            "training_cost": 0.005237666674962562,
             "evaluations": 5792
           },
           {
             "fold": 1,
             "seed": 29,
             "accuracy": 0.9972222222222222,
-            "bce": 0.015073630360729283,
-            "training_cost": 0.0071153973476581435,
+            "bce": 0.012818448469171875,
+            "training_cost": 0.00646141699960464,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.0034674879920601203,
-            "training_cost": 0.00640920250216766,
+            "bce": 0.003516256751322102,
+            "training_cost": 0.006981639139282756,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.004861878234664838,
-            "training_cost": 0.007668921890172687,
+            "bce": 0.008603391225989484,
+            "training_cost": 0.015070142194307669,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 11,
-            "accuracy": 0.994413407821229,
-            "bce": 0.01177262474638219,
-            "training_cost": 0.01091472940061023,
+            "accuracy": 1.0,
+            "bce": 0.0045409016090582465,
+            "training_cost": 0.005085598676938485,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 29,
             "accuracy": 0.9972067039106145,
-            "bce": 0.009656908634082438,
-            "training_cost": 0.00955524779771084,
+            "bce": 0.007453241323767449,
+            "training_cost": 0.006843173443405101,
             "evaluations": 5792
           }
         ],
-        "seconds": 2.4701780830000644
+        "seconds": 2.8097258750003675
       },
       {
         "config": {
@@ -283,6 +293,8 @@
           "iterations": 180,
           "c1": 1.49618,
           "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
           "inertia": [
             0.7298,
             0.4
@@ -299,60 +311,60 @@
           ]
         },
         "parameters": 49,
-        "mean_accuracy": 0.9990740740740741,
-        "std_accuracy": 0.0014344382763731124,
-        "mean_bce": 0.0029717583001405644,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 0.000452699408657474,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
-            "accuracy": 0.9972222222222222,
-            "bce": 0.007119917234980113,
-            "training_cost": 0.000621121646434445,
+            "accuracy": 1.0,
+            "bce": 0.0013862710019662708,
+            "training_cost": 0.0006090515011867975,
             "evaluations": 5792
           },
           {
             "fold": 1,
             "seed": 29,
-            "accuracy": 0.9972222222222222,
-            "bce": 0.009821193668870278,
-            "training_cost": 0.000676028735766694,
+            "accuracy": 1.0,
+            "bce": 0.0007125780618223311,
+            "training_cost": 0.0006411282677346656,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.0002929145944657211,
-            "training_cost": 0.0008891806770786746,
+            "bce": 6.502420131902733e-05,
+            "training_cost": 0.0006829933882200177,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.00012423109662866236,
-            "training_cost": 0.0007999298147100813,
+            "bce": 6.597220260769487e-05,
+            "training_cost": 0.0005887305078363346,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.00033678142046756395,
-            "training_cost": 0.0010658139838661553,
+            "bce": 0.00026675799306022884,
+            "training_cost": 0.0007077449244763636,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.00013551178543104412,
-            "training_cost": 0.0006576680086940213,
+            "bce": 0.00021959299116929088,
+            "training_cost": 0.0007333214014993352,
             "evaluations": 5792
           }
         ],
-        "seconds": 1.4608487499999683
+        "seconds": 1.8109852920006233
       },
       {
         "config": {
@@ -360,6 +372,8 @@
           "iterations": 180,
           "c1": 1.49618,
           "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
           "inertia": [
             0.7298,
             0.4
@@ -376,60 +390,60 @@
           ]
         },
         "parameters": 49,
-        "mean_accuracy": 0.9990740740740741,
-        "std_accuracy": 0.0022680460581325644,
-        "mean_bce": 0.0010589565763264106,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 0.0001955456010846869,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
-            "accuracy": 0.9944444444444445,
-            "bce": 0.004698886475656306,
-            "training_cost": 0.0007881127237535872,
+            "accuracy": 1.0,
+            "bce": 0.000290079257653176,
+            "training_cost": 0.00048368479086160625,
             "evaluations": 5792
           },
           {
             "fold": 1,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.00048821459990769784,
-            "training_cost": 0.0005700823879693948,
+            "bce": 0.000510256186574161,
+            "training_cost": 0.0004200675227927664,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.00017173905009595236,
-            "training_cost": 0.000562299356514987,
+            "bce": 7.005855989390064e-05,
+            "training_cost": 0.0005726279271367242,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.00013788193347742328,
-            "training_cost": 0.000618229605907279,
+            "bce": 2.1283694508893025e-05,
+            "training_cost": 0.00044003089898090794,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.0006720536096753058,
-            "training_cost": 0.0006430375201615264,
+            "bce": 9.814162297949313e-05,
+            "training_cost": 0.0004129581449779134,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.0001849637891457779,
-            "training_cost": 0.0006009983005679626,
+            "bce": 0.00018345428489849748,
+            "training_cost": 0.0006172380842763027,
             "evaluations": 5792
           }
         ],
-        "seconds": 0.9101131670004179
+        "seconds": 1.254938874999425
       },
       {
         "config": {
@@ -437,6 +451,8 @@
           "iterations": 180,
           "c1": 1.49618,
           "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
           "inertia": [
             0.7298,
             0.4
@@ -453,60 +469,60 @@
           ]
         },
         "parameters": 49,
-        "mean_accuracy": 0.9981455617628803,
-        "std_accuracy": 0.002269321612500279,
-        "mean_bce": 0.003964189606956715,
+        "mean_accuracy": 0.999537037037037,
+        "std_accuracy": 0.0011340230290662822,
+        "mean_bce": 0.0036400237596255804,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
-            "accuracy": 0.9944444444444445,
-            "bce": 0.008167378737851207,
-            "training_cost": 0.003766602175959406,
+            "accuracy": 1.0,
+            "bce": 0.0026125859785755185,
+            "training_cost": 0.001975574057119123,
             "evaluations": 5792
           },
           {
             "fold": 1,
             "seed": 29,
             "accuracy": 0.9972222222222222,
-            "bce": 0.0049774982905619975,
-            "training_cost": 0.002241054640667791,
+            "bce": 0.015086443321525155,
+            "training_cost": 0.002220864750071171,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.0016295230295006874,
-            "training_cost": 0.00384461141897455,
+            "bce": 0.0008597399741866247,
+            "training_cost": 0.00261559494705137,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.001746797528086511,
-            "training_cost": 0.0038823635548375117,
+            "bce": 0.0008233130693078474,
+            "training_cost": 0.0025162554966716,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.0024552604148284076,
-            "training_cost": 0.003531838245068351,
+            "bce": 0.001519311408228991,
+            "training_cost": 0.00253660249042184,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 29,
-            "accuracy": 0.9972067039106145,
-            "bce": 0.004808679640911478,
-            "training_cost": 0.002932161052686622,
+            "accuracy": 1.0,
+            "bce": 0.0009387488059293426,
+            "training_cost": 0.0018552177239379425,
             "evaluations": 5792
           }
         ],
-        "seconds": 4.223810041000434
+        "seconds": 4.6150082090007345
       },
       {
         "config": {
@@ -514,6 +530,8 @@
           "iterations": 180,
           "c1": 1.49618,
           "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
           "inertia": [
             0.7298,
             0.4
@@ -532,58 +550,58 @@
         "parameters": 73,
         "mean_accuracy": 0.9990740740740741,
         "std_accuracy": 0.0014344382763731124,
-        "mean_bce": 0.0026185467298672697,
+        "mean_bce": 0.003920015060687973,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
             "accuracy": 0.9972222222222222,
-            "bce": 0.004116376846220408,
-            "training_cost": 0.0004722584332100103,
+            "bce": 0.011535931104136555,
+            "training_cost": 0.0004122040910992907,
             "evaluations": 5792
           },
           {
             "fold": 1,
             "seed": 29,
             "accuracy": 0.9972222222222222,
-            "bce": 0.009257350945299118,
-            "training_cost": 0.0005423351522760986,
+            "bce": 0.011575814417752796,
+            "training_cost": 0.0004421181479262043,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.000684456750435146,
-            "training_cost": 0.0013040513639008345,
+            "bce": 4.646144212034795e-05,
+            "training_cost": 0.0005160495540512211,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.00035110361251666355,
-            "training_cost": 0.0010048935755893585,
+            "bce": 0.00012103418947886847,
+            "training_cost": 0.000673286495372759,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.00122539201899582,
-            "training_cost": 0.0006518155422846471,
+            "bce": 0.00010882872375524433,
+            "training_cost": 0.0005335757441608854,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 7.660020573646284e-05,
-            "training_cost": 0.0005870732557607793,
+            "bce": 0.00013202048688402203,
+            "training_cost": 0.0005282437217147769,
             "evaluations": 5792
           }
         ],
-        "seconds": 2.2753371250000782
+        "seconds": 2.774196041998948
       },
       {
         "config": {
@@ -591,6 +609,8 @@
           "iterations": 180,
           "c1": 1.49618,
           "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
           "inertia": [
             0.7298,
             0.4
@@ -607,60 +627,60 @@
           ]
         },
         "parameters": 73,
-        "mean_accuracy": 0.999537037037037,
-        "std_accuracy": 0.0011340230290662822,
-        "mean_bce": 0.0007468659599049052,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 0.00014890566206085572,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.0007184447777543719,
-            "training_cost": 0.0003905921349554967,
+            "bce": 0.00017053850298878224,
+            "training_cost": 0.0003373253521417505,
             "evaluations": 5792
           },
           {
             "fold": 1,
             "seed": 29,
-            "accuracy": 0.9972222222222222,
-            "bce": 0.0034442113144071943,
-            "training_cost": 0.0005793351428495083,
+            "accuracy": 1.0,
+            "bce": 0.00047165996163930213,
+            "training_cost": 0.0004306391895356903,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 4.195379835620464e-05,
-            "training_cost": 0.0007862947596464984,
+            "bce": 9.7322754406869e-05,
+            "training_cost": 0.00043544401515527054,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 1.555974733249719e-05,
-            "training_cost": 0.00043247359986995504,
+            "bce": 2.5401432007760673e-05,
+            "training_cost": 0.0004742188037398129,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 5.954189438262475e-05,
-            "training_cost": 0.0005042656760443136,
+            "bce": 6.297141246980101e-05,
+            "training_cost": 0.00037727641646846807,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.0002014842271965375,
-            "training_cost": 0.0008758547052415657,
+            "bce": 6.553990885261931e-05,
+            "training_cost": 0.0004738773335708881,
             "evaluations": 5792
           }
         ],
-        "seconds": 1.404910541999925
+        "seconds": 1.890888208999968
       },
       {
         "config": {
@@ -668,6 +688,8 @@
           "iterations": 180,
           "c1": 1.49618,
           "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
           "inertia": [
             0.7298,
             0.4
@@ -684,60 +706,60 @@
           ]
         },
         "parameters": 73,
-        "mean_accuracy": 0.999537037037037,
-        "std_accuracy": 0.0011340230290662822,
-        "mean_bce": 0.002706398629882247,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 0.0010391318549587952,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.0025510713051823514,
-            "training_cost": 0.0014353300170926132,
+            "bce": 0.00198502348104442,
+            "training_cost": 0.0012158033134506063,
             "evaluations": 5792
           },
           {
             "fold": 1,
             "seed": 29,
-            "accuracy": 0.9972222222222222,
-            "bce": 0.01004421392632912,
-            "training_cost": 0.0015369425707173596,
+            "accuracy": 1.0,
+            "bce": 0.001708839116090474,
+            "training_cost": 0.0014208798743376913,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.000517191307204616,
-            "training_cost": 0.0018598318449641448,
+            "bce": 0.0005619791939136176,
+            "training_cost": 0.00180174133441183,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.0013887578785727161,
-            "training_cost": 0.0033399890019706942,
+            "bce": 0.000525483797685816,
+            "training_cost": 0.0018968949800115147,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.0009301346866546156,
-            "training_cost": 0.0019431407804035663,
+            "bce": 0.0009343461097972785,
+            "training_cost": 0.00170865448520049,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.0008070226753500622,
-            "training_cost": 0.00192104912682769,
+            "bce": 0.0005191194312211645,
+            "training_cost": 0.001333265930020944,
             "evaluations": 5792
           }
         ],
-        "seconds": 6.548522666000281
+        "seconds": 7.302642790999016
       },
       {
         "config": {
@@ -745,6 +767,8 @@
           "iterations": 180,
           "c1": 1.49618,
           "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
           "inertia": [
             0.7298,
             0.4
@@ -765,58 +789,58 @@
         "parameters": 81,
         "mean_accuracy": 0.9990740740740741,
         "std_accuracy": 0.0014344382763731124,
-        "mean_bce": 0.004971124903073597,
+        "mean_bce": 0.002988690167275079,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
             "accuracy": 0.9972222222222222,
-            "bce": 0.01492848955463766,
-            "training_cost": 0.00022991295042990438,
+            "bce": 0.010957020022669383,
+            "training_cost": 0.00020890297118981717,
             "evaluations": 5792
           },
           {
             "fold": 1,
             "seed": 29,
             "accuracy": 0.9972222222222222,
-            "bce": 0.01276686466727725,
-            "training_cost": 0.000232353115193925,
+            "bce": 0.006859601724953047,
+            "training_cost": 0.0002540673784681905,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 1.1835274511628099e-05,
-            "training_cost": 0.0002674309093824762,
+            "bce": 1.4946721837658005e-05,
+            "training_cost": 0.00022760260161534698,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 3.132468193384613e-05,
-            "training_cost": 0.00019729445116319636,
+            "bce": 1.3466748738339186e-05,
+            "training_cost": 0.00022437199402425712,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.001027362648501391,
-            "training_cost": 0.0003117837880889493,
+            "bce": 1.5470192344160563e-05,
+            "training_cost": 0.0002403864309516032,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.0010608725915798101,
-            "training_cost": 0.0005701209990781333,
+            "bce": 7.163559310788769e-05,
+            "training_cost": 0.00040738146029965024,
             "evaluations": 5792
           }
         ],
-        "seconds": 2.2968057910002244
+        "seconds": 2.9181430829994497
       },
       {
         "config": {
@@ -824,6 +848,8 @@
           "iterations": 180,
           "c1": 1.49618,
           "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
           "inertia": [
             0.7298,
             0.4
@@ -842,60 +868,60 @@
           ]
         },
         "parameters": 81,
-        "mean_accuracy": 0.999537037037037,
-        "std_accuracy": 0.0011340230290662822,
-        "mean_bce": 0.003154865301779475,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 0.00042280616570603767,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.0012836301286639402,
-            "training_cost": 0.00029582401602659875,
+            "bce": 0.0008218679917503867,
+            "training_cost": 0.00022985164641401142,
             "evaluations": 5792
           },
           {
             "fold": 1,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 7.10087303319421e-05,
-            "training_cost": 0.0001446543627090971,
+            "bce": 0.0005166220679294674,
+            "training_cost": 0.0001516006669192651,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 11,
-            "accuracy": 0.9972222222222222,
-            "bce": 0.017511530106035768,
-            "training_cost": 0.00024592900768377314,
+            "accuracy": 1.0,
+            "bce": 9.939294167808782e-05,
+            "training_cost": 0.00014867174710162152,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 1.511745215058577e-06,
-            "training_cost": 0.00022036813316071805,
+            "bce": 6.523771498777954e-05,
+            "training_cost": 0.00016936558993862702,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 3.080327284268724e-05,
-            "training_cost": 0.00043841716646493746,
+            "bce": 0.0006954562274251857,
+            "training_cost": 0.0002304058514637889,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 3.0707827587452794e-05,
-            "training_cost": 0.00018582007544320245,
+            "bce": 0.000338260050465319,
+            "training_cost": 0.000433116868849989,
             "evaluations": 5792
           }
         ],
-        "seconds": 1.4822348329998931
+        "seconds": 1.8851812920001976
       },
       {
         "config": {
@@ -903,6 +929,8 @@
           "iterations": 180,
           "c1": 1.49618,
           "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
           "inertia": [
             0.7298,
             0.4
@@ -921,60 +949,60 @@
           ]
         },
         "parameters": 81,
-        "mean_accuracy": 0.999534450651769,
-        "std_accuracy": 0.001140358353251024,
-        "mean_bce": 0.0017344734519060623,
+        "mean_accuracy": 0.9990740740740741,
+        "std_accuracy": 0.0014344382763731124,
+        "mean_bce": 0.002192401656389202,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
-            "accuracy": 1.0,
-            "bce": 0.003411641275087555,
-            "training_cost": 0.0018614579028305028,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.007469974906110121,
+            "training_cost": 0.0008772881257627028,
             "evaluations": 5792
           },
           {
             "fold": 1,
             "seed": 29,
-            "accuracy": 1.0,
-            "bce": 0.0031275774893580084,
-            "training_cost": 0.002481235013416065,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.004022346570260596,
+            "training_cost": 0.001335232632950372,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.00034798750518419023,
-            "training_cost": 0.0015073546540977016,
+            "bce": 0.0002906462015338063,
+            "training_cost": 0.0014259666094645817,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.0006056397091225836,
-            "training_cost": 0.0018398753398905592,
+            "bce": 0.00023274250490862227,
+            "training_cost": 0.0012192144417455832,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 11,
-            "accuracy": 0.9972067039106145,
-            "bce": 0.002489383420972327,
-            "training_cost": 0.001553278114856543,
+            "accuracy": 1.0,
+            "bce": 0.0005521009102551151,
+            "training_cost": 0.0015399083484569024,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.0004246113117117083,
-            "training_cost": 0.0014135082394520103,
+            "bce": 0.0005865988452669526,
+            "training_cost": 0.001261464675190443,
             "evaluations": 5792
           }
         ],
-        "seconds": 6.249542874999861
+        "seconds": 6.719497791000322
       },
       {
         "config": {
@@ -982,6 +1010,8 @@
           "iterations": 180,
           "c1": 1.49618,
           "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
           "inertia": [
             0.7298,
             0.4
@@ -1000,60 +1030,60 @@
           ]
         },
         "parameters": 81,
-        "mean_accuracy": 0.9981455617628803,
-        "std_accuracy": 0.003364916059448387,
-        "mean_bce": 0.004412909329341781,
+        "mean_accuracy": 0.999537037037037,
+        "std_accuracy": 0.0011340230290662822,
+        "mean_bce": 0.0031351869489760213,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
-            "accuracy": 0.9916666666666667,
-            "bce": 0.011233508704928535,
-            "training_cost": 0.0002324646842993882,
+            "accuracy": 1.0,
+            "bce": 0.0017847267802959606,
+            "training_cost": 0.000187850122773218,
             "evaluations": 5792
           },
           {
             "fold": 1,
             "seed": 29,
-            "accuracy": 1.0,
-            "bce": 0.002157849399336051,
-            "training_cost": 0.00020260549162808114,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.015945822979706425,
+            "training_cost": 0.0001687742644631274,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 3.2182258917697725e-06,
-            "training_cost": 0.00021962146159306927,
+            "bce": 1.2553867404523249e-05,
+            "training_cost": 0.0002050344470338268,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 1.726736862062367e-05,
-            "training_cost": 0.00020018387887594407,
+            "bce": 0.0009869697964825135,
+            "training_cost": 0.0001982579349433899,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 4.688429627292193e-05,
-            "training_cost": 0.00026035491541362237,
+            "bce": 7.266675496226044e-05,
+            "training_cost": 0.00030535694295330404,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 29,
-            "accuracy": 0.9972067039106145,
-            "bce": 0.013018727981000785,
-            "training_cost": 0.00023753366426938616,
+            "accuracy": 1.0,
+            "bce": 8.381515004448255e-06,
+            "training_cost": 0.00018010062870812645,
             "evaluations": 5792
           }
         ],
-        "seconds": 2.1384696670002086
+        "seconds": 2.5261617500000284
       },
       {
         "config": {
@@ -1061,6 +1091,8 @@
           "iterations": 180,
           "c1": 1.49618,
           "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
           "inertia": [
             0.7298,
             0.4
@@ -1081,58 +1113,58 @@
         "parameters": 81,
         "mean_accuracy": 1.0,
         "std_accuracy": 0.0,
-        "mean_bce": 0.00016049800810496087,
+        "mean_bce": 0.0005190438046495561,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.00017958023713385242,
-            "training_cost": 0.0002964176306172826,
+            "bce": 0.0023701166915646066,
+            "training_cost": 0.00042946181778121104,
             "evaluations": 5792
           },
           {
             "fold": 1,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.0001834508815070702,
-            "training_cost": 0.0003004109826909005,
+            "bce": 0.0003813789548652976,
+            "training_cost": 0.00028867061949603806,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.0004875301497229633,
-            "training_cost": 0.000427967894343072,
+            "bce": 8.575904528032212e-06,
+            "training_cost": 0.00019749042596139155,
             "evaluations": 5792
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 8.27202554713e-05,
-            "training_cost": 0.0002836047167928282,
+            "bce": 0.0003099045207025083,
+            "training_cost": 0.00024493601044395496,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 1.6230904466871586e-05,
-            "training_cost": 0.0004080606572931933,
+            "bce": 3.409587670734758e-05,
+            "training_cost": 0.00025861613149243064,
             "evaluations": 5792
           },
           {
             "fold": 3,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 1.3475620327707642e-05,
-            "training_cost": 0.00023316324736087648,
+            "bce": 1.0190879529544704e-05,
+            "training_cost": 0.0002693639553557505,
             "evaluations": 5792
           }
         ],
-        "seconds": 1.819914417000291
+        "seconds": 2.2015910420013824
       }
     ],
     "refinement_results": [
@@ -1142,6 +1174,8 @@
           "iterations": 350,
           "c1": 1.49618,
           "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
           "inertia": [
             0.7298,
             0.4
@@ -1150,70 +1184,68 @@
           "velocity_fraction": 0.15,
           "l2": 0.0001,
           "hidden": [
-            8,
-            4
+            12
           ],
           "activations": [
             "relu",
-            "tanh",
             "logistic"
           ]
         },
-        "parameters": 81,
+        "parameters": 73,
         "mean_accuracy": 1.0,
         "std_accuracy": 0.0,
-        "mean_bce": 0.0008724660706632641,
+        "mean_bce": 0.00014597376849867865,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.003880964699823584,
-            "training_cost": 0.0002165682446952571,
+            "bce": 0.0002514298744018828,
+            "training_cost": 0.0002762087894708457,
             "evaluations": 16848
           },
           {
             "fold": 1,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.0012413029921859227,
-            "training_cost": 0.0004778943003666688,
+            "bce": 0.00037643820137661855,
+            "training_cost": 0.0002620151917827507,
             "evaluations": 16848
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 3.5956547932058415e-05,
-            "training_cost": 0.00020241314640111348,
+            "bce": 2.4608406638075628e-05,
+            "training_cost": 0.00033036021264927246,
             "evaluations": 16848
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 1.740928065738344e-05,
-            "training_cost": 0.0002784488888875264,
+            "bce": 4.723528593825859e-05,
+            "training_cost": 0.0003001366079176769,
             "evaluations": 16848
           },
           {
             "fold": 3,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 3.4992107319898004e-05,
-            "training_cost": 0.0002864526260221566,
+            "bce": 8.748461478791679e-05,
+            "training_cost": 0.0003244373053986054,
             "evaluations": 16848
           },
           {
             "fold": 3,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 2.4170796060738884e-05,
-            "training_cost": 0.00020292413683926276,
+            "bce": 8.864622784931955e-05,
+            "training_cost": 0.0003289819695371087,
             "evaluations": 16848
           }
         ],
-        "seconds": 5.703086958999847
+        "seconds": 5.419250292001379
       },
       {
         "config": {
@@ -1221,6 +1253,8 @@
           "iterations": 350,
           "c1": 1.7,
           "c2": 1.3,
+          "c_informant": 0.5,
+          "informant_count": 5,
           "inertia": [
             0.9,
             0.4
@@ -1229,70 +1263,68 @@
           "velocity_fraction": 0.15,
           "l2": 1e-05,
           "hidden": [
-            8,
-            4
+            12
           ],
           "activations": [
             "relu",
-            "tanh",
             "logistic"
           ]
         },
-        "parameters": 81,
-        "mean_accuracy": 0.999534450651769,
-        "std_accuracy": 0.001140358353251024,
-        "mean_bce": 0.001423810265189938,
+        "parameters": 73,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 0.0003064126975191926,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 5.227340838371904e-05,
-            "training_cost": 5.983468241283477e-05,
+            "bce": 0.00017577373007610653,
+            "training_cost": 3.9888819056010415e-05,
             "evaluations": 16848
           },
           {
             "fold": 1,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 1.8793498827662604e-06,
-            "training_cost": 2.3641374879437168e-05,
+            "bce": 0.0016140857693277885,
+            "training_cost": 3.668725508476136e-05,
             "evaluations": 16848
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 6.248405121359526e-06,
-            "training_cost": 2.3020825734332984e-05,
+            "bce": 1.6557967109890522e-06,
+            "training_cost": 5.1522927008027014e-05,
             "evaluations": 16848
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 1.2616987798554944e-06,
-            "training_cost": 3.5885159197714174e-05,
+            "bce": 1.2716250875791637e-05,
+            "training_cost": 4.178257932761088e-05,
             "evaluations": 16848
           },
           {
             "fold": 3,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 1.5578801601179497e-06,
-            "training_cost": 3.529290213857752e-05,
+            "bce": 7.643811697823108e-06,
+            "training_cost": 3.5949433926238695e-05,
             "evaluations": 16848
           },
           {
             "fold": 3,
             "seed": 29,
-            "accuracy": 0.9972067039106145,
-            "bce": 0.008479640848811809,
-            "training_cost": 3.1108411790807725e-05,
+            "accuracy": 1.0,
+            "bce": 2.6600826426656966e-05,
+            "training_cost": 4.751587898796101e-05,
             "evaluations": 16848
           }
         ],
-        "seconds": 5.605498500000067
+        "seconds": 5.554823291999128
       },
       {
         "config": {
@@ -1300,6 +1332,8 @@
           "iterations": 350,
           "c1": 1.3,
           "c2": 1.7,
+          "c_informant": 0.5,
+          "informant_count": 7,
           "inertia": [
             0.8,
             0.35
@@ -1308,70 +1342,68 @@
           "velocity_fraction": 0.1,
           "l2": 0.001,
           "hidden": [
-            8,
-            4
+            12
           ],
           "activations": [
             "relu",
-            "tanh",
             "logistic"
           ]
         },
-        "parameters": 81,
+        "parameters": 73,
         "mean_accuracy": 1.0,
         "std_accuracy": 0.0,
-        "mean_bce": 0.00046230232491161746,
+        "mean_bce": 0.0006931351054639324,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.0009485294793776109,
-            "training_cost": 0.0016862286867338383,
+            "bce": 0.001893108120442062,
+            "training_cost": 0.0016408844021900237,
             "evaluations": 16848
           },
           {
             "fold": 1,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.0008245698339147613,
-            "training_cost": 0.0014130110397597058,
+            "bce": 0.0011109345053216938,
+            "training_cost": 0.0017875863715954286,
             "evaluations": 16848
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 7.075498796752389e-05,
-            "training_cost": 0.0018553423660594688,
+            "bce": 0.0001707686767596862,
+            "training_cost": 0.0018984658433359488,
             "evaluations": 16848
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.0007627933729231259,
-            "training_cost": 0.0015373308719500444,
+            "bce": 0.00020353790718620121,
+            "training_cost": 0.002034588492961729,
             "evaluations": 16848
           },
           {
             "fold": 3,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 7.070616857315126e-05,
-            "training_cost": 0.001495051707010323,
+            "bce": 0.0003621491365086078,
+            "training_cost": 0.0018925919336759511,
             "evaluations": 16848
           },
           {
             "fold": 3,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 9.646010671353145e-05,
-            "training_cost": 0.0014369013117924198,
+            "bce": 0.0004183122865653433,
+            "training_cost": 0.0018431461925078022,
             "evaluations": 16848
           }
         ],
-        "seconds": 5.415272000000186
+        "seconds": 5.493663499999457
       },
       {
         "config": {
@@ -1379,6 +1411,8 @@
           "iterations": 350,
           "c1": 1.49618,
           "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
           "inertia": [
             0.7298,
             0.4
@@ -1387,299 +1421,68 @@
           "velocity_fraction": 0.15,
           "l2": 0.0001,
           "hidden": [
-            4
+            8
           ],
           "activations": [
             "relu",
             "logistic"
           ]
         },
-        "parameters": 25,
-        "mean_accuracy": 1.0,
-        "std_accuracy": 0.0,
-        "mean_bce": 0.0003188764107610088,
-        "scores": [
-          {
-            "fold": 1,
-            "seed": 11,
-            "accuracy": 1.0,
-            "bce": 0.0004167254024784799,
-            "training_cost": 0.0006130652925689546,
-            "evaluations": 16848
-          },
-          {
-            "fold": 1,
-            "seed": 29,
-            "accuracy": 1.0,
-            "bce": 0.0005493035031819475,
-            "training_cost": 0.0006136253018996216,
-            "evaluations": 16848
-          },
-          {
-            "fold": 2,
-            "seed": 11,
-            "accuracy": 1.0,
-            "bce": 8.805391360540339e-05,
-            "training_cost": 0.0007221457430410159,
-            "evaluations": 16848
-          },
-          {
-            "fold": 2,
-            "seed": 29,
-            "accuracy": 1.0,
-            "bce": 9.872769226780027e-05,
-            "training_cost": 0.0006898150908318641,
-            "evaluations": 16848
-          },
-          {
-            "fold": 3,
-            "seed": 11,
-            "accuracy": 1.0,
-            "bce": 0.0006259582437452922,
-            "training_cost": 0.0007520071436388118,
-            "evaluations": 16848
-          },
-          {
-            "fold": 3,
-            "seed": 29,
-            "accuracy": 1.0,
-            "bce": 0.00013448970928712966,
-            "training_cost": 0.0008124638028745458,
-            "evaluations": 16848
-          }
-        ],
-        "seconds": 2.7501090830000976
-      },
-      {
-        "config": {
-          "particles": 48,
-          "iterations": 350,
-          "c1": 1.7,
-          "c2": 1.3,
-          "inertia": [
-            0.9,
-            0.4
-          ],
-          "bound": 8.0,
-          "velocity_fraction": 0.15,
-          "l2": 1e-05,
-          "hidden": [
-            4
-          ],
-          "activations": [
-            "relu",
-            "logistic"
-          ]
-        },
-        "parameters": 25,
-        "mean_accuracy": 0.9986033519553073,
-        "std_accuracy": 0.003421075059753027,
-        "mean_bce": 0.0022810373487438854,
-        "scores": [
-          {
-            "fold": 1,
-            "seed": 11,
-            "accuracy": 1.0,
-            "bce": 0.0003723453128935761,
-            "training_cost": 7.776293104575642e-05,
-            "evaluations": 16848
-          },
-          {
-            "fold": 1,
-            "seed": 29,
-            "accuracy": 1.0,
-            "bce": 0.0006633729270970969,
-            "training_cost": 8.01370677289774e-05,
-            "evaluations": 16848
-          },
-          {
-            "fold": 2,
-            "seed": 11,
-            "accuracy": 1.0,
-            "bce": 1.8511915991278307e-05,
-            "training_cost": 9.947977715795787e-05,
-            "evaluations": 16848
-          },
-          {
-            "fold": 2,
-            "seed": 29,
-            "accuracy": 1.0,
-            "bce": 2.9818747816212025e-05,
-            "training_cost": 9.898571519927059e-05,
-            "evaluations": 16848
-          },
-          {
-            "fold": 3,
-            "seed": 11,
-            "accuracy": 0.9916201117318436,
-            "bce": 0.01249268320016352,
-            "training_cost": 0.003999315204266298,
-            "evaluations": 16848
-          },
-          {
-            "fold": 3,
-            "seed": 29,
-            "accuracy": 1.0,
-            "bce": 0.00010949198850162993,
-            "training_cost": 0.00011300559863640217,
-            "evaluations": 16848
-          }
-        ],
-        "seconds": 2.7477817919998415
-      },
-      {
-        "config": {
-          "particles": 48,
-          "iterations": 350,
-          "c1": 1.3,
-          "c2": 1.7,
-          "inertia": [
-            0.8,
-            0.35
-          ],
-          "bound": 4.0,
-          "velocity_fraction": 0.1,
-          "l2": 0.001,
-          "hidden": [
-            4
-          ],
-          "activations": [
-            "relu",
-            "logistic"
-          ]
-        },
-        "parameters": 25,
+        "parameters": 49,
         "mean_accuracy": 0.999537037037037,
         "std_accuracy": 0.0011340230290662822,
-        "mean_bce": 0.0024696901230734447,
+        "mean_bce": 0.0006389997436802764,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
             "accuracy": 0.9972222222222222,
-            "bce": 0.006671521052679578,
-            "training_cost": 0.004301229284056364,
+            "bce": 0.0031722121273816207,
+            "training_cost": 0.00041614535007840125,
             "evaluations": 16848
           },
           {
             "fold": 1,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.0025386353878776744,
-            "training_cost": 0.004366249115008383,
+            "bce": 0.00036737455653584303,
+            "training_cost": 0.0003798530545476172,
             "evaluations": 16848
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.0010037960506385087,
-            "training_cost": 0.005981254358159807,
+            "bce": 4.729873919287367e-05,
+            "training_cost": 0.00039787162510064,
             "evaluations": 16848
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.000750052321953741,
-            "training_cost": 0.0049081312923604055,
+            "bce": 4.1295612529847566e-05,
+            "training_cost": 0.00037376232264101956,
             "evaluations": 16848
           },
           {
             "fold": 3,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.002803875745091555,
-            "training_cost": 0.008035039874771291,
+            "bce": 0.00010603549896195233,
+            "training_cost": 0.00037972341700050297,
             "evaluations": 16848
           },
           {
             "fold": 3,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.0010502601801996119,
-            "training_cost": 0.004981649231227157,
+            "bce": 9.978192747952107e-05,
+            "training_cost": 0.0003673978346263964,
             "evaluations": 16848
           }
         ],
-        "seconds": 2.8247343339999134
-      },
-      {
-        "config": {
-          "particles": 48,
-          "iterations": 350,
-          "c1": 1.49618,
-          "c2": 1.49618,
-          "inertia": [
-            0.7298,
-            0.4
-          ],
-          "bound": 6.0,
-          "velocity_fraction": 0.15,
-          "l2": 0.0001,
-          "hidden": [
-            12
-          ],
-          "activations": [
-            "relu",
-            "logistic"
-          ]
-        },
-        "parameters": 73,
-        "mean_accuracy": 1.0,
-        "std_accuracy": 0.0,
-        "mean_bce": 0.00017480425397667766,
-        "scores": [
-          {
-            "fold": 1,
-            "seed": 11,
-            "accuracy": 1.0,
-            "bce": 0.0005780836592444923,
-            "training_cost": 0.00031435515106230654,
-            "evaluations": 16848
-          },
-          {
-            "fold": 1,
-            "seed": 29,
-            "accuracy": 1.0,
-            "bce": 0.00019948290159593838,
-            "training_cost": 0.0003329572358823252,
-            "evaluations": 16848
-          },
-          {
-            "fold": 2,
-            "seed": 11,
-            "accuracy": 1.0,
-            "bce": 0.00010664181082223484,
-            "training_cost": 0.0003675214567133446,
-            "evaluations": 16848
-          },
-          {
-            "fold": 2,
-            "seed": 29,
-            "accuracy": 1.0,
-            "bce": 1.287011293053913e-05,
-            "training_cost": 0.00032330616529612,
-            "evaluations": 16848
-          },
-          {
-            "fold": 3,
-            "seed": 11,
-            "accuracy": 1.0,
-            "bce": 5.2731780163178255e-05,
-            "training_cost": 0.0003678379384872418,
-            "evaluations": 16848
-          },
-          {
-            "fold": 3,
-            "seed": 29,
-            "accuracy": 1.0,
-            "bce": 9.901525910368305e-05,
-            "training_cost": 0.0003471985452039671,
-            "evaluations": 16848
-          }
-        ],
-        "seconds": 4.17609208399972
+        "seconds": 3.8277341249995516
       },
       {
         "config": {
@@ -1687,6 +1490,8 @@
           "iterations": 350,
           "c1": 1.7,
           "c2": 1.3,
+          "c_informant": 0.5,
+          "informant_count": 5,
           "inertia": [
             0.9,
             0.4
@@ -1695,68 +1500,68 @@
           "velocity_fraction": 0.15,
           "l2": 1e-05,
           "hidden": [
-            12
+            8
           ],
           "activations": [
             "relu",
             "logistic"
           ]
         },
-        "parameters": 73,
+        "parameters": 49,
         "mean_accuracy": 1.0,
         "std_accuracy": 0.0,
-        "mean_bce": 0.00014142859942568376,
+        "mean_bce": 7.723198195489301e-05,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.00021006028765991564,
-            "training_cost": 3.829672702465411e-05,
+            "bce": 0.00016823154387464047,
+            "training_cost": 6.550060741783198e-05,
             "evaluations": 16848
           },
           {
             "fold": 1,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 2.7973764619440095e-05,
-            "training_cost": 3.8929843699709576e-05,
+            "bce": 0.0002518807964374385,
+            "training_cost": 4.43445630968087e-05,
             "evaluations": 16848
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.00020405745434998187,
-            "training_cost": 5.214900473696427e-05,
+            "bce": 2.1403070021251515e-06,
+            "training_cost": 5.805334421986234e-05,
             "evaluations": 16848
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.0003809622860617076,
-            "training_cost": 7.494976145427133e-05,
+            "bce": 4.2006302055126144e-06,
+            "training_cost": 5.4550866881820645e-05,
             "evaluations": 16848
           },
           {
             "fold": 3,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 1.8404048106798827e-05,
-            "training_cost": 6.411416290391112e-05,
+            "bce": 1.5872043496452947e-05,
+            "training_cost": 4.822442286346775e-05,
             "evaluations": 16848
           },
           {
             "fold": 3,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 7.113755756258602e-06,
-            "training_cost": 3.836382995692891e-05,
+            "bce": 2.106657071318833e-05,
+            "training_cost": 5.821304445836961e-05,
             "evaluations": 16848
           }
         ],
-        "seconds": 4.235517791999882
+        "seconds": 3.9638185420008085
       },
       {
         "config": {
@@ -1764,6 +1569,8 @@
           "iterations": 350,
           "c1": 1.3,
           "c2": 1.7,
+          "c_informant": 0.5,
+          "informant_count": 7,
           "inertia": [
             0.8,
             0.35
@@ -1772,68 +1579,311 @@
           "velocity_fraction": 0.1,
           "l2": 0.001,
           "hidden": [
-            12
+            8
           ],
           "activations": [
             "relu",
             "logistic"
           ]
         },
-        "parameters": 73,
-        "mean_accuracy": 1.0,
-        "std_accuracy": 0.0,
-        "mean_bce": 0.0007409280738053633,
+        "parameters": 49,
+        "mean_accuracy": 0.999537037037037,
+        "std_accuracy": 0.0011340230290662822,
+        "mean_bce": 0.0011624743766577561,
         "scores": [
           {
             "fold": 1,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.001074491416245129,
-            "training_cost": 0.001721329194216049,
+            "bce": 0.00178560176294658,
+            "training_cost": 0.0023679054359394404,
+            "evaluations": 16848
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.003520710755751428,
+            "training_cost": 0.0025726635299440307,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.00030480545695971747,
+            "training_cost": 0.0027892265907931506,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.00028310321870120183,
+            "training_cost": 0.002674061286136338,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0006100092376390642,
+            "training_cost": 0.002716930770376757,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0004706158279485455,
+            "training_cost": 0.0026995801467273152,
+            "evaluations": 16848
+          }
+        ],
+        "seconds": 3.8927906250009983
+      },
+      {
+        "config": {
+          "particles": 48,
+          "iterations": 350,
+          "c1": 1.49618,
+          "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
+          "inertia": [
+            0.7298,
+            0.4
+          ],
+          "bound": 6.0,
+          "velocity_fraction": 0.15,
+          "l2": 0.0001,
+          "hidden": [
+            8,
+            4
+          ],
+          "activations": [
+            "relu",
+            "relu",
+            "logistic"
+          ]
+        },
+        "parameters": 81,
+        "mean_accuracy": 0.999537037037037,
+        "std_accuracy": 0.0011340230290662822,
+        "mean_bce": 0.0023329206857256586,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.01390520599348068,
+            "training_cost": 0.00017727262353113,
             "evaluations": 16848
           },
           {
             "fold": 1,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.002199312862034928,
-            "training_cost": 0.0017432227777365644,
+            "bce": 3.595837530880378e-05,
+            "training_cost": 0.0001446691656765458,
             "evaluations": 16848
           },
           {
             "fold": 2,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.0003198768523259766,
-            "training_cost": 0.0022365029326430444,
+            "bce": 7.624433247150158e-06,
+            "training_cost": 0.00012356618333360527,
             "evaluations": 16848
           },
           {
             "fold": 2,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.00014829831219128156,
-            "training_cost": 0.002060895222992475,
+            "bce": 5.591982734867797e-06,
+            "training_cost": 0.0001971801329909359,
             "evaluations": 16848
           },
           {
             "fold": 3,
             "seed": 11,
             "accuracy": 1.0,
-            "bce": 0.0003230368738506377,
-            "training_cost": 0.002132036655947326,
+            "bce": 2.6743222590766573e-05,
+            "training_cost": 0.0001360526887193481,
             "evaluations": 16848
           },
           {
             "fold": 3,
             "seed": 29,
             "accuracy": 1.0,
-            "bce": 0.0003805521261842276,
-            "training_cost": 0.0020131800452683323,
+            "bce": 1.6400106991684523e-05,
+            "training_cost": 0.00018831057986885383,
             "evaluations": 16848
           }
         ],
-        "seconds": 4.223768415999984
+        "seconds": 5.820900332999372
+      },
+      {
+        "config": {
+          "particles": 48,
+          "iterations": 350,
+          "c1": 1.7,
+          "c2": 1.3,
+          "c_informant": 0.5,
+          "informant_count": 5,
+          "inertia": [
+            0.9,
+            0.4
+          ],
+          "bound": 8.0,
+          "velocity_fraction": 0.15,
+          "l2": 1e-05,
+          "hidden": [
+            8,
+            4
+          ],
+          "activations": [
+            "relu",
+            "relu",
+            "logistic"
+          ]
+        },
+        "parameters": 81,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 5.912461877284565e-05,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 1.4545423365793404e-05,
+            "training_cost": 1.5587823976319116e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 4.481505409541676e-06,
+            "training_cost": 1.714830532218851e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 9.06902695829832e-06,
+            "training_cost": 1.7552703788850732e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 1.0437844856748804e-05,
+            "training_cost": 2.7030737097341365e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 2.37128118459808e-05,
+            "training_cost": 1.552225663366527e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0002925011002007109,
+            "training_cost": 3.7004085604777905e-05,
+            "evaluations": 16848
+          }
+        ],
+        "seconds": 5.828799541999615
+      },
+      {
+        "config": {
+          "particles": 48,
+          "iterations": 350,
+          "c1": 1.3,
+          "c2": 1.7,
+          "c_informant": 0.5,
+          "informant_count": 7,
+          "inertia": [
+            0.8,
+            0.35
+          ],
+          "bound": 4.0,
+          "velocity_fraction": 0.1,
+          "l2": 0.001,
+          "hidden": [
+            8,
+            4
+          ],
+          "activations": [
+            "relu",
+            "relu",
+            "logistic"
+          ]
+        },
+        "parameters": 81,
+        "mean_accuracy": 0.999537037037037,
+        "std_accuracy": 0.0011340230290662822,
+        "mean_bce": 0.0005793604388607299,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0002628119179572848,
+            "training_cost": 0.0010292908835013656,
+            "evaluations": 16848
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.002911123954382759,
+            "training_cost": 0.0007903100998803448,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 2.3768635412641886e-05,
+            "training_cost": 0.0009464000374452676,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 6.932269846380101e-05,
+            "training_cost": 0.0008586941873991165,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.00010620092701883833,
+            "training_cost": 0.0007929524853266198,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.00010293449992905478,
+            "training_cost": 0.0008901748969806625,
+            "evaluations": 16848
+          }
+        ],
+        "seconds": 5.790096167000229
       }
     ],
     "test_report": {
@@ -1858,7 +1908,7 @@
         0.9859719604283536,
         1.0000000000000002
       ],
-      "binary_cross_entropy": 1.8565162385756664e-06,
+      "binary_cross_entropy": 8.478738723096129e-07,
       "majority_baseline_accuracy": 0.5481481481481482
     }
   }
