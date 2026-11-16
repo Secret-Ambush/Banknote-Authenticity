@@ -115,3 +115,39 @@ the two implementations have different objectives, evaluation budgets and search
 spaces. The shared holdout has already been inspected, so its scores must not be
 presented as fresh external validation. Architecture/seed selection optimism,
 unknown specimen dependence and distribution shift remain limitations.
+
+## Riddhi's nested generalisation study
+
+From the project root:
+
+```bash
+python -m src.evaluation.riddhi_nested_cv
+python -m pytest tests/test_riddhi_nested_cv.py -q
+```
+
+The runner extracts the actual notebook ANN/PSO definitions and search settings
+without executing notebook experiments. It runs five outer folds on the 1,078
+development rows, leaving the existing 270-row holdout excluded. Within each
+outer training partition it repeats all 14 architecture candidates and nine
+shortlisted PSO refinements using three inner folds and two seeds. Scalers are
+training-only at both levels. Three outer-training restarts are selected by
+training objective, never by outer-validation accuracy. The threshold stays 0.5.
+
+There are 690 inner fits and 15 outer-training restarts. Results are saved
+separately under `Riddhi/ann_results/nested_cv/`: all inner scores, selected
+configs, split identities, five fitted fold models and one out-of-fold prediction
+per development row. A completed study is not overwritten automatically.
+The notebook's final section displays per-fold accuracy, balanced accuracy, F1,
+BCE, majority baselines, pooled confusion and mistakes. These do not replace the
+dashboard's final models. Fold variation is descriptive, not a confidence
+interval. Prior dataset/search-space exploration and unknown specimen dependence
+still limit claims of external generalisation.
+
+The completed five-fold study (outer seed 271828) produced 1 error among 1,078
+out-of-fold predictions: pooled accuracy 99.9072%, balanced accuracy 99.9153%,
+and Class 1 F1 99.8976%. Outer-fold accuracies were 99.5370%, 100%, 100%, 100%,
+100%; their sample SD was 0.2070 percentage points. The confusion matrix was
+`[[589, 1], [0, 488]]` (actual rows, predicted columns). The one error was source
+row index 349 (zero-based), actual Class 0, predicted Class 1 with probability
+0.54427. This supports strong within-dataset generalisation of the search
+procedure, not perfection or a fresh external validation claim.
