@@ -1,7 +1,14 @@
 {
   "owner": "Riddhi",
   "source": "ann.ipynb",
-  "protocol": "Repeated stratified 3-fold CV; one locked final test holdout.",
+  "source_artifact": "ann_results/experiment.json",
+  "protocol": {
+    "architecture_metric": "Mean validation accuracy over repeated stratified 3-fold cross-validation",
+    "repeats": 2,
+    "folds": 3,
+    "test_set": "One locked holdout, reported only for the selected final architecture",
+    "duplicate_policy": "Remove exact duplicate rows before splitting; retain near duplicates."
+  },
   "experiment": {
     "owner": "Riddhi",
     "source_notebook": "ann.ipynb",
@@ -127,7 +134,7 @@
             "evaluations": 5792
           }
         ],
-        "seconds": 1.6195129159987118
+        "seconds": 1.4854075830007787
       },
       {
         "config": {
@@ -206,7 +213,7 @@
             "evaluations": 5792
           }
         ],
-        "seconds": 1.4059072500003822
+        "seconds": 1.268841083998268
       },
       {
         "config": {
@@ -285,7 +292,7 @@
             "evaluations": 5792
           }
         ],
-        "seconds": 2.8097258750003675
+        "seconds": 2.7287559590040473
       },
       {
         "config": {
@@ -364,7 +371,7 @@
             "evaluations": 5792
           }
         ],
-        "seconds": 1.8109852920006233
+        "seconds": 1.8016284580007778
       },
       {
         "config": {
@@ -443,7 +450,7 @@
             "evaluations": 5792
           }
         ],
-        "seconds": 1.254938874999425
+        "seconds": 1.2260441670005093
       },
       {
         "config": {
@@ -522,7 +529,7 @@
             "evaluations": 5792
           }
         ],
-        "seconds": 4.6150082090007345
+        "seconds": 4.358526500000153
       },
       {
         "config": {
@@ -601,7 +608,7 @@
             "evaluations": 5792
           }
         ],
-        "seconds": 2.774196041998948
+        "seconds": 2.7608832500045537
       },
       {
         "config": {
@@ -680,7 +687,7 @@
             "evaluations": 5792
           }
         ],
-        "seconds": 1.890888208999968
+        "seconds": 1.8462390420027077
       },
       {
         "config": {
@@ -759,7 +766,7 @@
             "evaluations": 5792
           }
         ],
-        "seconds": 7.302642790999016
+        "seconds": 6.93498004200228
       },
       {
         "config": {
@@ -840,7 +847,7 @@
             "evaluations": 5792
           }
         ],
-        "seconds": 2.9181430829994497
+        "seconds": 2.723609625005338
       },
       {
         "config": {
@@ -921,7 +928,7 @@
             "evaluations": 5792
           }
         ],
-        "seconds": 1.8851812920001976
+        "seconds": 1.8049694169967552
       },
       {
         "config": {
@@ -1002,7 +1009,7 @@
             "evaluations": 5792
           }
         ],
-        "seconds": 6.719497791000322
+        "seconds": 6.647893082998053
       },
       {
         "config": {
@@ -1083,7 +1090,7 @@
             "evaluations": 5792
           }
         ],
-        "seconds": 2.5261617500000284
+        "seconds": 2.4232779589947313
       },
       {
         "config": {
@@ -1164,7 +1171,7 @@
             "evaluations": 5792
           }
         ],
-        "seconds": 2.2015910420013824
+        "seconds": 2.0891678750049323
       }
     ],
     "refinement_results": [
@@ -1245,7 +1252,7 @@
             "evaluations": 16848
           }
         ],
-        "seconds": 5.419250292001379
+        "seconds": 5.103605624994088
       },
       {
         "config": {
@@ -1324,7 +1331,7 @@
             "evaluations": 16848
           }
         ],
-        "seconds": 5.554823291999128
+        "seconds": 5.514873291002004
       },
       {
         "config": {
@@ -1403,7 +1410,7 @@
             "evaluations": 16848
           }
         ],
-        "seconds": 5.493663499999457
+        "seconds": 5.419978666002862
       },
       {
         "config": {
@@ -1482,7 +1489,7 @@
             "evaluations": 16848
           }
         ],
-        "seconds": 3.8277341249995516
+        "seconds": 3.890757917004521
       },
       {
         "config": {
@@ -1561,7 +1568,7 @@
             "evaluations": 16848
           }
         ],
-        "seconds": 3.9638185420008085
+        "seconds": 4.174575500001083
       },
       {
         "config": {
@@ -1640,7 +1647,7 @@
             "evaluations": 16848
           }
         ],
-        "seconds": 3.8927906250009983
+        "seconds": 3.969869791995734
       },
       {
         "config": {
@@ -1721,7 +1728,7 @@
             "evaluations": 16848
           }
         ],
-        "seconds": 5.820900332999372
+        "seconds": 5.845693542003573
       },
       {
         "config": {
@@ -1802,7 +1809,7 @@
             "evaluations": 16848
           }
         ],
-        "seconds": 5.828799541999615
+        "seconds": 5.690019833004044
       },
       {
         "config": {
@@ -1883,7 +1890,7 @@
             "evaluations": 16848
           }
         ],
-        "seconds": 5.790096167000229
+        "seconds": 5.629030042000522
       }
     ],
     "test_report": {

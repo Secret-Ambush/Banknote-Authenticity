@@ -1,0 +1,1915 @@
+{
+  "owner": "Riddhi",
+  "source": "ann.ipynb",
+  "protocol": "Repeated stratified 3-fold CV; one locked final test holdout.",
+  "experiment": {
+    "owner": "Riddhi",
+    "source_notebook": "ann.ipynb",
+    "data_sha256": "c276b8f8d9bd9b7f1be911873b8139aaecf82b3114e4d0bf75c06af6defeeb5f",
+    "python": "3.14.3",
+    "numpy": "2.5.4",
+    "duplicate_policy": "Remove exact duplicate rows before splitting; retain near duplicates.",
+    "split_seed": 2026,
+    "fold_seed": 31415,
+    "fold_count": 3,
+    "search_seeds": [
+      11,
+      29
+    ],
+    "final_seeds": [
+      101,
+      202,
+      303
+    ],
+    "selected_final_seed": 101,
+    "ranking": "Mean validation accuracy descending, BCE ascending, parameter count ascending.",
+    "best_config": {
+      "particles": 48,
+      "iterations": 350,
+      "c1": 1.7,
+      "c2": 1.3,
+      "c_informant": 0.5,
+      "informant_count": 5,
+      "inertia": [
+        0.9,
+        0.4
+      ],
+      "bound": 8.0,
+      "velocity_fraction": 0.15,
+      "l2": 1e-05,
+      "hidden": [
+        8,
+        4
+      ],
+      "activations": [
+        "relu",
+        "relu",
+        "logistic"
+      ]
+    },
+    "selected_validation_accuracy": 1.0,
+    "selected_validation_bce": 5.912461877284565e-05,
+    "architecture_results": [
+      {
+        "config": {
+          "particles": 32,
+          "iterations": 180,
+          "c1": 1.49618,
+          "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
+          "inertia": [
+            0.7298,
+            0.4
+          ],
+          "bound": 6.0,
+          "velocity_fraction": 0.15,
+          "l2": 0.0001,
+          "hidden": [
+            4
+          ],
+          "activations": [
+            "tanh",
+            "logistic"
+          ]
+        },
+        "parameters": 25,
+        "mean_accuracy": 0.999537037037037,
+        "std_accuracy": 0.0011340230290662822,
+        "mean_bce": 0.0035948621279805887,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.01658436104632279,
+            "training_cost": 0.0010621923420460289,
+            "evaluations": 5792
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0015528176824168949,
+            "training_cost": 0.0010973279880093006,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.00020135316836364305,
+            "training_cost": 0.0012522144193488182,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0002442818102683678,
+            "training_cost": 0.00120276406489227,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0026317406272771755,
+            "training_cost": 0.00170942243346282,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0003546184332346585,
+            "training_cost": 0.0011562664996871163,
+            "evaluations": 5792
+          }
+        ],
+        "seconds": 1.4854075830007787
+      },
+      {
+        "config": {
+          "particles": 32,
+          "iterations": 180,
+          "c1": 1.49618,
+          "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
+          "inertia": [
+            0.7298,
+            0.4
+          ],
+          "bound": 6.0,
+          "velocity_fraction": 0.15,
+          "l2": 0.0001,
+          "hidden": [
+            4
+          ],
+          "activations": [
+            "relu",
+            "logistic"
+          ]
+        },
+        "parameters": 25,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 0.0005329037802650304,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0014533438895164643,
+            "training_cost": 0.0008516591399577244,
+            "evaluations": 5792
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0009851560617246968,
+            "training_cost": 0.0009243837617359949,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0002478472011979221,
+            "training_cost": 0.0009904234807203232,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 7.23999920983446e-05,
+            "training_cost": 0.0008743006846705632,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0001506988079116044,
+            "training_cost": 0.0008437884630153216,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.00028797672914114976,
+            "training_cost": 0.0007349562621940593,
+            "evaluations": 5792
+          }
+        ],
+        "seconds": 1.268841083998268
+      },
+      {
+        "config": {
+          "particles": 32,
+          "iterations": 180,
+          "c1": 1.49618,
+          "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
+          "inertia": [
+            0.7298,
+            0.4
+          ],
+          "bound": 6.0,
+          "velocity_fraction": 0.15,
+          "l2": 0.0001,
+          "hidden": [
+            4
+          ],
+          "activations": [
+            "logistic",
+            "logistic"
+          ]
+        },
+        "parameters": 25,
+        "mean_accuracy": 0.9986085247258432,
+        "std_accuracy": 0.0015242953241986414,
+        "mean_bce": 0.008944603281923254,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.016735380312230368,
+            "training_cost": 0.005237666674962562,
+            "evaluations": 5792
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.012818448469171875,
+            "training_cost": 0.00646141699960464,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.003516256751322102,
+            "training_cost": 0.006981639139282756,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.008603391225989484,
+            "training_cost": 0.015070142194307669,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0045409016090582465,
+            "training_cost": 0.005085598676938485,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 0.9972067039106145,
+            "bce": 0.007453241323767449,
+            "training_cost": 0.006843173443405101,
+            "evaluations": 5792
+          }
+        ],
+        "seconds": 2.7287559590040473
+      },
+      {
+        "config": {
+          "particles": 32,
+          "iterations": 180,
+          "c1": 1.49618,
+          "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
+          "inertia": [
+            0.7298,
+            0.4
+          ],
+          "bound": 6.0,
+          "velocity_fraction": 0.15,
+          "l2": 0.0001,
+          "hidden": [
+            8
+          ],
+          "activations": [
+            "tanh",
+            "logistic"
+          ]
+        },
+        "parameters": 49,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 0.000452699408657474,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0013862710019662708,
+            "training_cost": 0.0006090515011867975,
+            "evaluations": 5792
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0007125780618223311,
+            "training_cost": 0.0006411282677346656,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 6.502420131902733e-05,
+            "training_cost": 0.0006829933882200177,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 6.597220260769487e-05,
+            "training_cost": 0.0005887305078363346,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.00026675799306022884,
+            "training_cost": 0.0007077449244763636,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.00021959299116929088,
+            "training_cost": 0.0007333214014993352,
+            "evaluations": 5792
+          }
+        ],
+        "seconds": 1.8016284580007778
+      },
+      {
+        "config": {
+          "particles": 32,
+          "iterations": 180,
+          "c1": 1.49618,
+          "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
+          "inertia": [
+            0.7298,
+            0.4
+          ],
+          "bound": 6.0,
+          "velocity_fraction": 0.15,
+          "l2": 0.0001,
+          "hidden": [
+            8
+          ],
+          "activations": [
+            "relu",
+            "logistic"
+          ]
+        },
+        "parameters": 49,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 0.0001955456010846869,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.000290079257653176,
+            "training_cost": 0.00048368479086160625,
+            "evaluations": 5792
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.000510256186574161,
+            "training_cost": 0.0004200675227927664,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 7.005855989390064e-05,
+            "training_cost": 0.0005726279271367242,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 2.1283694508893025e-05,
+            "training_cost": 0.00044003089898090794,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 9.814162297949313e-05,
+            "training_cost": 0.0004129581449779134,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.00018345428489849748,
+            "training_cost": 0.0006172380842763027,
+            "evaluations": 5792
+          }
+        ],
+        "seconds": 1.2260441670005093
+      },
+      {
+        "config": {
+          "particles": 32,
+          "iterations": 180,
+          "c1": 1.49618,
+          "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
+          "inertia": [
+            0.7298,
+            0.4
+          ],
+          "bound": 6.0,
+          "velocity_fraction": 0.15,
+          "l2": 0.0001,
+          "hidden": [
+            8
+          ],
+          "activations": [
+            "logistic",
+            "logistic"
+          ]
+        },
+        "parameters": 49,
+        "mean_accuracy": 0.999537037037037,
+        "std_accuracy": 0.0011340230290662822,
+        "mean_bce": 0.0036400237596255804,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0026125859785755185,
+            "training_cost": 0.001975574057119123,
+            "evaluations": 5792
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.015086443321525155,
+            "training_cost": 0.002220864750071171,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0008597399741866247,
+            "training_cost": 0.00261559494705137,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0008233130693078474,
+            "training_cost": 0.0025162554966716,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.001519311408228991,
+            "training_cost": 0.00253660249042184,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0009387488059293426,
+            "training_cost": 0.0018552177239379425,
+            "evaluations": 5792
+          }
+        ],
+        "seconds": 4.358526500000153
+      },
+      {
+        "config": {
+          "particles": 32,
+          "iterations": 180,
+          "c1": 1.49618,
+          "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
+          "inertia": [
+            0.7298,
+            0.4
+          ],
+          "bound": 6.0,
+          "velocity_fraction": 0.15,
+          "l2": 0.0001,
+          "hidden": [
+            12
+          ],
+          "activations": [
+            "tanh",
+            "logistic"
+          ]
+        },
+        "parameters": 73,
+        "mean_accuracy": 0.9990740740740741,
+        "std_accuracy": 0.0014344382763731124,
+        "mean_bce": 0.003920015060687973,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.011535931104136555,
+            "training_cost": 0.0004122040910992907,
+            "evaluations": 5792
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.011575814417752796,
+            "training_cost": 0.0004421181479262043,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 4.646144212034795e-05,
+            "training_cost": 0.0005160495540512211,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.00012103418947886847,
+            "training_cost": 0.000673286495372759,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.00010882872375524433,
+            "training_cost": 0.0005335757441608854,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.00013202048688402203,
+            "training_cost": 0.0005282437217147769,
+            "evaluations": 5792
+          }
+        ],
+        "seconds": 2.7608832500045537
+      },
+      {
+        "config": {
+          "particles": 32,
+          "iterations": 180,
+          "c1": 1.49618,
+          "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
+          "inertia": [
+            0.7298,
+            0.4
+          ],
+          "bound": 6.0,
+          "velocity_fraction": 0.15,
+          "l2": 0.0001,
+          "hidden": [
+            12
+          ],
+          "activations": [
+            "relu",
+            "logistic"
+          ]
+        },
+        "parameters": 73,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 0.00014890566206085572,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.00017053850298878224,
+            "training_cost": 0.0003373253521417505,
+            "evaluations": 5792
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.00047165996163930213,
+            "training_cost": 0.0004306391895356903,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 9.7322754406869e-05,
+            "training_cost": 0.00043544401515527054,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 2.5401432007760673e-05,
+            "training_cost": 0.0004742188037398129,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 6.297141246980101e-05,
+            "training_cost": 0.00037727641646846807,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 6.553990885261931e-05,
+            "training_cost": 0.0004738773335708881,
+            "evaluations": 5792
+          }
+        ],
+        "seconds": 1.8462390420027077
+      },
+      {
+        "config": {
+          "particles": 32,
+          "iterations": 180,
+          "c1": 1.49618,
+          "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
+          "inertia": [
+            0.7298,
+            0.4
+          ],
+          "bound": 6.0,
+          "velocity_fraction": 0.15,
+          "l2": 0.0001,
+          "hidden": [
+            12
+          ],
+          "activations": [
+            "logistic",
+            "logistic"
+          ]
+        },
+        "parameters": 73,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 0.0010391318549587952,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.00198502348104442,
+            "training_cost": 0.0012158033134506063,
+            "evaluations": 5792
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.001708839116090474,
+            "training_cost": 0.0014208798743376913,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0005619791939136176,
+            "training_cost": 0.00180174133441183,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.000525483797685816,
+            "training_cost": 0.0018968949800115147,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0009343461097972785,
+            "training_cost": 0.00170865448520049,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0005191194312211645,
+            "training_cost": 0.001333265930020944,
+            "evaluations": 5792
+          }
+        ],
+        "seconds": 6.93498004200228
+      },
+      {
+        "config": {
+          "particles": 32,
+          "iterations": 180,
+          "c1": 1.49618,
+          "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
+          "inertia": [
+            0.7298,
+            0.4
+          ],
+          "bound": 6.0,
+          "velocity_fraction": 0.15,
+          "l2": 0.0001,
+          "hidden": [
+            8,
+            4
+          ],
+          "activations": [
+            "tanh",
+            "tanh",
+            "logistic"
+          ]
+        },
+        "parameters": 81,
+        "mean_accuracy": 0.9990740740740741,
+        "std_accuracy": 0.0014344382763731124,
+        "mean_bce": 0.002988690167275079,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.010957020022669383,
+            "training_cost": 0.00020890297118981717,
+            "evaluations": 5792
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.006859601724953047,
+            "training_cost": 0.0002540673784681905,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 1.4946721837658005e-05,
+            "training_cost": 0.00022760260161534698,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 1.3466748738339186e-05,
+            "training_cost": 0.00022437199402425712,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 1.5470192344160563e-05,
+            "training_cost": 0.0002403864309516032,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 7.163559310788769e-05,
+            "training_cost": 0.00040738146029965024,
+            "evaluations": 5792
+          }
+        ],
+        "seconds": 2.723609625005338
+      },
+      {
+        "config": {
+          "particles": 32,
+          "iterations": 180,
+          "c1": 1.49618,
+          "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
+          "inertia": [
+            0.7298,
+            0.4
+          ],
+          "bound": 6.0,
+          "velocity_fraction": 0.15,
+          "l2": 0.0001,
+          "hidden": [
+            8,
+            4
+          ],
+          "activations": [
+            "relu",
+            "relu",
+            "logistic"
+          ]
+        },
+        "parameters": 81,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 0.00042280616570603767,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0008218679917503867,
+            "training_cost": 0.00022985164641401142,
+            "evaluations": 5792
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0005166220679294674,
+            "training_cost": 0.0001516006669192651,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 9.939294167808782e-05,
+            "training_cost": 0.00014867174710162152,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 6.523771498777954e-05,
+            "training_cost": 0.00016936558993862702,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0006954562274251857,
+            "training_cost": 0.0002304058514637889,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.000338260050465319,
+            "training_cost": 0.000433116868849989,
+            "evaluations": 5792
+          }
+        ],
+        "seconds": 1.8049694169967552
+      },
+      {
+        "config": {
+          "particles": 32,
+          "iterations": 180,
+          "c1": 1.49618,
+          "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
+          "inertia": [
+            0.7298,
+            0.4
+          ],
+          "bound": 6.0,
+          "velocity_fraction": 0.15,
+          "l2": 0.0001,
+          "hidden": [
+            8,
+            4
+          ],
+          "activations": [
+            "logistic",
+            "logistic",
+            "logistic"
+          ]
+        },
+        "parameters": 81,
+        "mean_accuracy": 0.9990740740740741,
+        "std_accuracy": 0.0014344382763731124,
+        "mean_bce": 0.002192401656389202,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.007469974906110121,
+            "training_cost": 0.0008772881257627028,
+            "evaluations": 5792
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.004022346570260596,
+            "training_cost": 0.001335232632950372,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0002906462015338063,
+            "training_cost": 0.0014259666094645817,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.00023274250490862227,
+            "training_cost": 0.0012192144417455832,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0005521009102551151,
+            "training_cost": 0.0015399083484569024,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0005865988452669526,
+            "training_cost": 0.001261464675190443,
+            "evaluations": 5792
+          }
+        ],
+        "seconds": 6.647893082998053
+      },
+      {
+        "config": {
+          "particles": 32,
+          "iterations": 180,
+          "c1": 1.49618,
+          "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
+          "inertia": [
+            0.7298,
+            0.4
+          ],
+          "bound": 6.0,
+          "velocity_fraction": 0.15,
+          "l2": 0.0001,
+          "hidden": [
+            8,
+            4
+          ],
+          "activations": [
+            "tanh",
+            "relu",
+            "logistic"
+          ]
+        },
+        "parameters": 81,
+        "mean_accuracy": 0.999537037037037,
+        "std_accuracy": 0.0011340230290662822,
+        "mean_bce": 0.0031351869489760213,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0017847267802959606,
+            "training_cost": 0.000187850122773218,
+            "evaluations": 5792
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.015945822979706425,
+            "training_cost": 0.0001687742644631274,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 1.2553867404523249e-05,
+            "training_cost": 0.0002050344470338268,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0009869697964825135,
+            "training_cost": 0.0001982579349433899,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 7.266675496226044e-05,
+            "training_cost": 0.00030535694295330404,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 8.381515004448255e-06,
+            "training_cost": 0.00018010062870812645,
+            "evaluations": 5792
+          }
+        ],
+        "seconds": 2.4232779589947313
+      },
+      {
+        "config": {
+          "particles": 32,
+          "iterations": 180,
+          "c1": 1.49618,
+          "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
+          "inertia": [
+            0.7298,
+            0.4
+          ],
+          "bound": 6.0,
+          "velocity_fraction": 0.15,
+          "l2": 0.0001,
+          "hidden": [
+            8,
+            4
+          ],
+          "activations": [
+            "relu",
+            "tanh",
+            "logistic"
+          ]
+        },
+        "parameters": 81,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 0.0005190438046495561,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0023701166915646066,
+            "training_cost": 0.00042946181778121104,
+            "evaluations": 5792
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0003813789548652976,
+            "training_cost": 0.00028867061949603806,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 8.575904528032212e-06,
+            "training_cost": 0.00019749042596139155,
+            "evaluations": 5792
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0003099045207025083,
+            "training_cost": 0.00024493601044395496,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 3.409587670734758e-05,
+            "training_cost": 0.00025861613149243064,
+            "evaluations": 5792
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 1.0190879529544704e-05,
+            "training_cost": 0.0002693639553557505,
+            "evaluations": 5792
+          }
+        ],
+        "seconds": 2.0891678750049323
+      }
+    ],
+    "refinement_results": [
+      {
+        "config": {
+          "particles": 48,
+          "iterations": 350,
+          "c1": 1.49618,
+          "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
+          "inertia": [
+            0.7298,
+            0.4
+          ],
+          "bound": 6.0,
+          "velocity_fraction": 0.15,
+          "l2": 0.0001,
+          "hidden": [
+            12
+          ],
+          "activations": [
+            "relu",
+            "logistic"
+          ]
+        },
+        "parameters": 73,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 0.00014597376849867865,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0002514298744018828,
+            "training_cost": 0.0002762087894708457,
+            "evaluations": 16848
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.00037643820137661855,
+            "training_cost": 0.0002620151917827507,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 2.4608406638075628e-05,
+            "training_cost": 0.00033036021264927246,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 4.723528593825859e-05,
+            "training_cost": 0.0003001366079176769,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 8.748461478791679e-05,
+            "training_cost": 0.0003244373053986054,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 8.864622784931955e-05,
+            "training_cost": 0.0003289819695371087,
+            "evaluations": 16848
+          }
+        ],
+        "seconds": 5.103605624994088
+      },
+      {
+        "config": {
+          "particles": 48,
+          "iterations": 350,
+          "c1": 1.7,
+          "c2": 1.3,
+          "c_informant": 0.5,
+          "informant_count": 5,
+          "inertia": [
+            0.9,
+            0.4
+          ],
+          "bound": 8.0,
+          "velocity_fraction": 0.15,
+          "l2": 1e-05,
+          "hidden": [
+            12
+          ],
+          "activations": [
+            "relu",
+            "logistic"
+          ]
+        },
+        "parameters": 73,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 0.0003064126975191926,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.00017577373007610653,
+            "training_cost": 3.9888819056010415e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0016140857693277885,
+            "training_cost": 3.668725508476136e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 1.6557967109890522e-06,
+            "training_cost": 5.1522927008027014e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 1.2716250875791637e-05,
+            "training_cost": 4.178257932761088e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 7.643811697823108e-06,
+            "training_cost": 3.5949433926238695e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 2.6600826426656966e-05,
+            "training_cost": 4.751587898796101e-05,
+            "evaluations": 16848
+          }
+        ],
+        "seconds": 5.514873291002004
+      },
+      {
+        "config": {
+          "particles": 48,
+          "iterations": 350,
+          "c1": 1.3,
+          "c2": 1.7,
+          "c_informant": 0.5,
+          "informant_count": 7,
+          "inertia": [
+            0.8,
+            0.35
+          ],
+          "bound": 4.0,
+          "velocity_fraction": 0.1,
+          "l2": 0.001,
+          "hidden": [
+            12
+          ],
+          "activations": [
+            "relu",
+            "logistic"
+          ]
+        },
+        "parameters": 73,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 0.0006931351054639324,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.001893108120442062,
+            "training_cost": 0.0016408844021900237,
+            "evaluations": 16848
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0011109345053216938,
+            "training_cost": 0.0017875863715954286,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0001707686767596862,
+            "training_cost": 0.0018984658433359488,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.00020353790718620121,
+            "training_cost": 0.002034588492961729,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0003621491365086078,
+            "training_cost": 0.0018925919336759511,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0004183122865653433,
+            "training_cost": 0.0018431461925078022,
+            "evaluations": 16848
+          }
+        ],
+        "seconds": 5.419978666002862
+      },
+      {
+        "config": {
+          "particles": 48,
+          "iterations": 350,
+          "c1": 1.49618,
+          "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
+          "inertia": [
+            0.7298,
+            0.4
+          ],
+          "bound": 6.0,
+          "velocity_fraction": 0.15,
+          "l2": 0.0001,
+          "hidden": [
+            8
+          ],
+          "activations": [
+            "relu",
+            "logistic"
+          ]
+        },
+        "parameters": 49,
+        "mean_accuracy": 0.999537037037037,
+        "std_accuracy": 0.0011340230290662822,
+        "mean_bce": 0.0006389997436802764,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.0031722121273816207,
+            "training_cost": 0.00041614535007840125,
+            "evaluations": 16848
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.00036737455653584303,
+            "training_cost": 0.0003798530545476172,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 4.729873919287367e-05,
+            "training_cost": 0.00039787162510064,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 4.1295612529847566e-05,
+            "training_cost": 0.00037376232264101956,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.00010603549896195233,
+            "training_cost": 0.00037972341700050297,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 9.978192747952107e-05,
+            "training_cost": 0.0003673978346263964,
+            "evaluations": 16848
+          }
+        ],
+        "seconds": 3.890757917004521
+      },
+      {
+        "config": {
+          "particles": 48,
+          "iterations": 350,
+          "c1": 1.7,
+          "c2": 1.3,
+          "c_informant": 0.5,
+          "informant_count": 5,
+          "inertia": [
+            0.9,
+            0.4
+          ],
+          "bound": 8.0,
+          "velocity_fraction": 0.15,
+          "l2": 1e-05,
+          "hidden": [
+            8
+          ],
+          "activations": [
+            "relu",
+            "logistic"
+          ]
+        },
+        "parameters": 49,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 7.723198195489301e-05,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.00016823154387464047,
+            "training_cost": 6.550060741783198e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0002518807964374385,
+            "training_cost": 4.43445630968087e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 2.1403070021251515e-06,
+            "training_cost": 5.805334421986234e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 4.2006302055126144e-06,
+            "training_cost": 5.4550866881820645e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 1.5872043496452947e-05,
+            "training_cost": 4.822442286346775e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 2.106657071318833e-05,
+            "training_cost": 5.821304445836961e-05,
+            "evaluations": 16848
+          }
+        ],
+        "seconds": 4.174575500001083
+      },
+      {
+        "config": {
+          "particles": 48,
+          "iterations": 350,
+          "c1": 1.3,
+          "c2": 1.7,
+          "c_informant": 0.5,
+          "informant_count": 7,
+          "inertia": [
+            0.8,
+            0.35
+          ],
+          "bound": 4.0,
+          "velocity_fraction": 0.1,
+          "l2": 0.001,
+          "hidden": [
+            8
+          ],
+          "activations": [
+            "relu",
+            "logistic"
+          ]
+        },
+        "parameters": 49,
+        "mean_accuracy": 0.999537037037037,
+        "std_accuracy": 0.0011340230290662822,
+        "mean_bce": 0.0011624743766577561,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.00178560176294658,
+            "training_cost": 0.0023679054359394404,
+            "evaluations": 16848
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.003520710755751428,
+            "training_cost": 0.0025726635299440307,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.00030480545695971747,
+            "training_cost": 0.0027892265907931506,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.00028310321870120183,
+            "training_cost": 0.002674061286136338,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0006100092376390642,
+            "training_cost": 0.002716930770376757,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0004706158279485455,
+            "training_cost": 0.0026995801467273152,
+            "evaluations": 16848
+          }
+        ],
+        "seconds": 3.969869791995734
+      },
+      {
+        "config": {
+          "particles": 48,
+          "iterations": 350,
+          "c1": 1.49618,
+          "c2": 1.49618,
+          "c_informant": 0.5,
+          "informant_count": 3,
+          "inertia": [
+            0.7298,
+            0.4
+          ],
+          "bound": 6.0,
+          "velocity_fraction": 0.15,
+          "l2": 0.0001,
+          "hidden": [
+            8,
+            4
+          ],
+          "activations": [
+            "relu",
+            "relu",
+            "logistic"
+          ]
+        },
+        "parameters": 81,
+        "mean_accuracy": 0.999537037037037,
+        "std_accuracy": 0.0011340230290662822,
+        "mean_bce": 0.0023329206857256586,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.01390520599348068,
+            "training_cost": 0.00017727262353113,
+            "evaluations": 16848
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 3.595837530880378e-05,
+            "training_cost": 0.0001446691656765458,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 7.624433247150158e-06,
+            "training_cost": 0.00012356618333360527,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 5.591982734867797e-06,
+            "training_cost": 0.0001971801329909359,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 2.6743222590766573e-05,
+            "training_cost": 0.0001360526887193481,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 1.6400106991684523e-05,
+            "training_cost": 0.00018831057986885383,
+            "evaluations": 16848
+          }
+        ],
+        "seconds": 5.845693542003573
+      },
+      {
+        "config": {
+          "particles": 48,
+          "iterations": 350,
+          "c1": 1.7,
+          "c2": 1.3,
+          "c_informant": 0.5,
+          "informant_count": 5,
+          "inertia": [
+            0.9,
+            0.4
+          ],
+          "bound": 8.0,
+          "velocity_fraction": 0.15,
+          "l2": 1e-05,
+          "hidden": [
+            8,
+            4
+          ],
+          "activations": [
+            "relu",
+            "relu",
+            "logistic"
+          ]
+        },
+        "parameters": 81,
+        "mean_accuracy": 1.0,
+        "std_accuracy": 0.0,
+        "mean_bce": 5.912461877284565e-05,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 1.4545423365793404e-05,
+            "training_cost": 1.5587823976319116e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 4.481505409541676e-06,
+            "training_cost": 1.714830532218851e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 9.06902695829832e-06,
+            "training_cost": 1.7552703788850732e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 1.0437844856748804e-05,
+            "training_cost": 2.7030737097341365e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 2.37128118459808e-05,
+            "training_cost": 1.552225663366527e-05,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.0002925011002007109,
+            "training_cost": 3.7004085604777905e-05,
+            "evaluations": 16848
+          }
+        ],
+        "seconds": 5.690019833004044
+      },
+      {
+        "config": {
+          "particles": 48,
+          "iterations": 350,
+          "c1": 1.3,
+          "c2": 1.7,
+          "c_informant": 0.5,
+          "informant_count": 7,
+          "inertia": [
+            0.8,
+            0.35
+          ],
+          "bound": 4.0,
+          "velocity_fraction": 0.1,
+          "l2": 0.001,
+          "hidden": [
+            8,
+            4
+          ],
+          "activations": [
+            "relu",
+            "relu",
+            "logistic"
+          ]
+        },
+        "parameters": 81,
+        "mean_accuracy": 0.999537037037037,
+        "std_accuracy": 0.0011340230290662822,
+        "mean_bce": 0.0005793604388607299,
+        "scores": [
+          {
+            "fold": 1,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.0002628119179572848,
+            "training_cost": 0.0010292908835013656,
+            "evaluations": 16848
+          },
+          {
+            "fold": 1,
+            "seed": 29,
+            "accuracy": 0.9972222222222222,
+            "bce": 0.002911123954382759,
+            "training_cost": 0.0007903100998803448,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 2.3768635412641886e-05,
+            "training_cost": 0.0009464000374452676,
+            "evaluations": 16848
+          },
+          {
+            "fold": 2,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 6.932269846380101e-05,
+            "training_cost": 0.0008586941873991165,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 11,
+            "accuracy": 1.0,
+            "bce": 0.00010620092701883833,
+            "training_cost": 0.0007929524853266198,
+            "evaluations": 16848
+          },
+          {
+            "fold": 3,
+            "seed": 29,
+            "accuracy": 1.0,
+            "bce": 0.00010293449992905478,
+            "training_cost": 0.0008901748969806625,
+            "evaluations": 16848
+          }
+        ],
+        "seconds": 5.629030042000522
+      }
+    ],
+    "test_report": {
+      "samples": 270,
+      "accuracy": 1.0,
+      "balanced_accuracy": 1.0,
+      "precision_class_1": 1.0,
+      "recall_class_1": 1.0,
+      "f1_class_1": 1.0,
+      "roc_auc": 1.0,
+      "confusion_matrix": [
+        [
+          148,
+          0
+        ],
+        [
+          0,
+          122
+        ]
+      ],
+      "accuracy_wilson_95": [
+        0.9859719604283536,
+        1.0000000000000002
+      ],
+      "binary_cross_entropy": 8.478738723096129e-07,
+      "majority_baseline_accuracy": 0.5481481481481482
+    }
+  }
+}

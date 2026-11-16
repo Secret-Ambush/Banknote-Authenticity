@@ -2,3 +2,7 @@ numpy
 pandas
 matplotlib
 pytest
+plotly
+streamlit
+ipython
+nbformat>=4.2.0

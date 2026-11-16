@@ -11,11 +11,14 @@ import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
+from src.evaluation.shared_comparison import comparison_metrics, comparison_predictions
+
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-SCRIPTS_DIR = SCRIPT_DIR.parent
-COURSEWORK_ROOT = SCRIPTS_DIR.parent
+COURSEWORK_ROOT = SCRIPT_DIR
+RIDDHI_ROOT = COURSEWORK_ROOT / "Riddhi"
 WORKSPACE_ROOT = COURSEWORK_ROOT.parent
+RESULTS_DIR = RIDDHI_ROOT / "ann_results"
 FEATURES = ["variance", "skewness", "curtosis", "entropy"]
 CLASS_NAMES = {0: "Class 0", 1: "Class 1"}
 COLORS = {0: "#54d6a0", 1: "#ff7d91"}
@@ -121,11 +124,6 @@ def show_data_tab(
         "Banknote Authentication · four continuous image-derived features · binary target. "
         "Exact duplicate rows are excluded to match the experiment split."
     )
-    if data_digest != experiment.get("data_sha256"):
-        st.warning("The current data file does not match the SHA-256 recorded in the experiment.")
-    if repaired_labels:
-        st.info(f"Repaired {repaired_labels} stray section-sign label(s) in memory; the source file is unchanged.")
-
     counts = data["class"].value_counts().sort_index()
     first, second, third, fourth = st.columns(4)
     first.metric("Unique examples", f"{len(data):,}", f"{len(raw) - len(data)} exact duplicates removed")
@@ -222,6 +220,14 @@ def show_models_tab(experiment: dict) -> None:
     )
     models = make_model_frame(experiment["architecture_results"])
     best_label = architecture_label(experiment["best_config"])
+    perfect_count = int((models["CV accuracy"] == 1.0).sum())
+    st.info(
+        f"{perfect_count} of {len(models)} architectures achieved exactly 100% mean CV accuracy. "
+        f"The full range is {models['CV accuracy'].min():.4%} to "
+        f"{models['CV accuracy'].max():.4%}. Near-perfect accuracy can hide differences; "
+        "compare validation BCE (lower is better) and individual fold scores as well. "
+        "These are validation results, not separate test scores for every architecture."
+    )
 
     left, right = st.columns([1.35, 1], gap="large")
     with left:
@@ -260,16 +266,16 @@ def show_models_tab(experiment: dict) -> None:
             x="Parameters",
             y="CV accuracy",
             color="Activation",
-            size="CV std",
-            size_max=18,
             hover_name="Model",
             hover_data={"CV BCE": ":.5g", "CV std": ":.4g", "Parameters": True},
             color_discrete_sequence=px.colors.qualitative.Safe,
         )
+        fig.update_traces(marker=dict(size=10))
         fig.update_yaxes(tickformat=".2%", title="Mean CV accuracy")
         fig.update_xaxes(title="Trainable parameters")
         chart_layout(fig, 430)
         st.plotly_chart(fig, width="stretch", config={"displaylogo": False})
+        st.caption("All models use visible, equal-sized markers, including those with zero CV standard deviation.")
 
     st.markdown("#### Candidate leaderboard")
     display = models.drop(columns=["Scores"]).sort_values(
@@ -512,6 +518,226 @@ def confusion_counts(actual: np.ndarray, predicted: np.ndarray) -> tuple[int, in
     return true_negative, false_positive, false_negative, true_positive
 
 
+def architecture_figure(model: dict[str, np.ndarray], owner: str) -> go.Figure:
+    layers = [int(width) for width in model["layer_sizes"]]
+    activations = ["inputs", *[str(name) for name in model["activations"]]]
+    positions = [np.arange(width) - (width - 1) / 2 for width in layers]
+    edge_x, edge_y = [], []
+    for layer in range(len(layers) - 1):
+        for start in positions[layer]:
+            for end in positions[layer + 1]:
+                edge_x.extend([layer, layer + 1, None])
+                edge_y.extend([start, end, None])
+    fig = go.Figure(go.Scatter(
+        x=edge_x, y=edge_y, mode="lines", line=dict(color="#314155", width=1),
+        hoverinfo="skip", showlegend=False,
+    ))
+    for layer, (width, y, activation) in enumerate(zip(layers, positions, activations)):
+        name = "Input" if layer == 0 else "Output" if layer == len(layers) - 1 else f"Hidden {layer}"
+        fig.add_trace(go.Scatter(
+            x=[layer] * width, y=y, mode="markers",
+            marker=dict(size=17, color="#54d6a0" if layer == 0 else "#87a9ff"),
+            text=[f"{name} · neuron {index + 1} · {activation}" for index in range(width)],
+            hovertemplate="%{text}<extra></extra>", showlegend=False,
+        ))
+        fig.add_annotation(
+            x=layer, y=max(layers) / 2 + 0.6,
+            text=f"{name}<br>{width} · {activation}", showarrow=False,
+        )
+    chart_layout(fig, 340)
+    fig.update_layout(title=f"{owner} · {describe_layers(layers)}")
+    fig.update_xaxes(visible=False, range=[-0.4, len(layers) - 0.6])
+    fig.update_yaxes(visible=False, range=[-max(layers) / 2 - 0.5, max(layers) / 2 + 2])
+    return fig
+
+
+def roc_points(actual: np.ndarray, probabilities: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    order = np.argsort(-probabilities, kind="stable")
+    truth, scores = actual[order], probabilities[order]
+    endpoints = np.r_[np.flatnonzero(np.diff(scores)), len(scores) - 1]
+    return (
+        np.r_[0, np.cumsum(truth == 0)[endpoints] / np.sum(actual == 0)],
+        np.r_[0, np.cumsum(truth == 1)[endpoints] / np.sum(actual == 1)],
+    )
+
+
+def show_shared_comparison(experiment: dict, raw: pd.DataFrame, data_digest: str) -> None:
+    st.subheader("Same samples · two selected models")
+    try:
+        metadata, riddhi, maazuddin, rows = comparison_predictions(
+            RESULTS_DIR, raw[FEATURES + ["class"]].to_numpy(), data_digest,
+        )
+        current_experiment = json.loads((RESULTS_DIR / "experiment.json").read_text())
+        if current_experiment != experiment:
+            raise ValueError("Riddhi's named bundle is stale; refresh it before comparing models.")
+    except (OSError, ValueError, KeyError) as error:
+        st.error(f"Shared comparison is unavailable: {error}")
+        st.caption("From the project root, refresh the named results and generate the shared-split model:")
+        st.code("python Riddhi/Scripts/save_person_results.py\npython -m src.evaluation.shared_comparison")
+        return
+
+    actual = rows["actual_class"]
+    models = {"Riddhi": riddhi, "Maazuddin": maazuddin}
+    st.caption(
+        f"Both models are evaluated on the exact same {len(actual)} deduplicated rows, excluded "
+        f"from both training and CV. Shared development set: {len(riddhi['development_indices'])} rows. "
+        "Decision threshold is fixed at 0.50 for both; neither model is selected by these test scores."
+    )
+    st.warning(
+        "Maazuddin's model is newly selected by development CV and trained on the shared split, "
+        "not taken from his historical 70/30 experiment. The test set has already been inspected. "
+        "Training objectives, budgets and search spaces differ, so this is not an architecture-only "
+        "or contributor-only ranking. Details are under Selection protocol below."
+    )
+    for column, (owner, model) in zip(st.columns(2, gap="large"), models.items()):
+        with column:
+            st.plotly_chart(architecture_figure(model, owner), width="stretch", config={"displaylogo": False})
+            st.caption(
+                f"{len(model['parameters'])} weights and biases · "
+                f"Activations: {' → '.join(str(value) for value in model['activations'])}. "
+                "Lines show connectivity, not weight magnitude; biases are included in the count."
+            )
+
+    summary, predictions = [], {}
+    for owner in models:
+        probabilities = rows[owner]
+        predicted = (probabilities >= 0.5).astype(int)
+        predictions[owner] = predicted
+        scores = comparison_metrics(actual, probabilities)
+        summary.append({
+            "Model": owner, "Architecture": describe_layers(models[owner]["layer_sizes"]),
+            "Parameters": len(models[owner]["parameters"]),
+            "Accuracy": scores["accuracy"], "Balanced accuracy": scores["balanced_accuracy"],
+            "Precision (class 1)": scores["precision"], "Recall (class 1)": scores["recall"],
+            "F1 (class 1)": scores["f1_score"], "ROC AUC": scores["roc_auc"],
+            "Brier score": scores["brier_score"],
+            "Correct": int(np.sum(predicted == actual)), "Errors": int(np.sum(predicted != actual)),
+        })
+    summary_frame = pd.DataFrame(summary)
+    st.markdown("#### Shared-test results")
+    st.dataframe(
+        summary_frame.style.format({
+            **{name: "{:.2%}" for name in (
+                "Accuracy", "Balanced accuracy", "Precision (class 1)", "Recall (class 1)", "F1 (class 1)",
+            )},
+            "ROC AUC": "{:.4f}", "Brier score": "{:.6g}",
+        }), width="stretch", hide_index=True,
+    )
+    st.caption(
+        "Balanced accuracy gives both classes equal weight. Precision/recall/F1 describe Class 1; "
+        "undefined precision is shown as 0. Brier score measures probability error (lower is better). "
+        "Perfect accuracy on this sample does not establish perfect generalisation or calibration."
+    )
+    bars = summary_frame.melt(
+        id_vars="Model", value_vars=["Accuracy", "Balanced accuracy", "F1 (class 1)", "ROC AUC"],
+        var_name="Metric", value_name="Score",
+    )
+    fig = px.bar(bars, x="Metric", y="Score", color="Model", barmode="group",
+                 color_discrete_sequence=["#54d6a0", "#87a9ff"])
+    chart_layout(fig)
+    fig.update_yaxes(range=[0, 1.05], tickformat=".0%")
+    st.plotly_chart(fig, width="stretch", config={"displaylogo": False})
+
+    probability_frame = pd.concat([
+        pd.DataFrame({
+            "Model": owner, "P(class 1)": rows[owner],
+            "Actual class": [CLASS_NAMES[int(label)] for label in actual],
+        })
+        for owner in models
+    ], ignore_index=True)
+    fig = px.histogram(
+        probability_frame, x="P(class 1)", color="Actual class", facet_col="Model",
+        nbins=40, barmode="overlay", opacity=0.7,
+        color_discrete_map={"Class 0": COLORS[0], "Class 1": COLORS[1]},
+    )
+    chart_layout(fig)
+    fig.update_xaxes(range=[0, 1])
+    fig.update_layout(title="Confidence by model · same samples")
+    st.plotly_chart(fig, width="stretch", config={"displaylogo": False})
+    st.caption(
+        "Two models can classify the same rows correctly but give different probabilities. "
+        "Class 0 should lie below 0.5 and Class 1 above it. Distance from 0.5 indicates confidence, "
+        "not class imbalance; these histograms do not establish calibration on future data."
+    )
+
+    for column, owner in zip(st.columns(2, gap="large"), models):
+        with column:
+            tn, fp, fn, tp = confusion_counts(actual, predictions[owner])
+            matrix = np.asarray([[tn, fp], [fn, tp]])
+            fig = go.Figure(go.Heatmap(
+                z=matrix, x=["Predicted 0", "Predicted 1"], y=["Actual 0", "Actual 1"],
+                text=matrix, texttemplate="%{text}", colorscale="Blues", showscale=False,
+            ))
+            chart_layout(fig, 310)
+            fig.update_layout(title=f"{owner} · confusion matrix")
+            st.plotly_chart(fig, width="stretch", config={"displaylogo": False})
+    fig = go.Figure()
+    for owner, color in zip(models, ["#54d6a0", "#87a9ff"]):
+        fpr, tpr = roc_points(actual, rows[owner])
+        fig.add_trace(go.Scatter(
+            x=fpr, y=tpr, mode="lines", name=owner, line=dict(color=color, width=3),
+        ))
+    fig.add_trace(go.Scatter(
+        x=[0, 1], y=[0, 1], mode="lines", name="Chance", line=dict(dash="dash", color="#8393a8"),
+    ))
+    chart_layout(fig)
+    fig.update_layout(title="ROC curves · same test rows")
+    fig.update_xaxes(title="False-positive rate", range=[0, 1])
+    fig.update_yaxes(title="True-positive rate", range=[0, 1])
+    st.plotly_chart(fig, width="stretch", config={"displaylogo": False})
+
+    st.markdown("#### Compare individual test samples")
+    table = pd.DataFrame({
+        "Source row (0-based)": rows["original_row_index"], "Actual class": actual,
+        "Riddhi P(class 1)": rows["Riddhi"], "Riddhi prediction": predictions["Riddhi"],
+        "Maazuddin P(class 1)": rows["Maazuddin"], "Maazuddin prediction": predictions["Maazuddin"],
+        "Models agree": predictions["Riddhi"] == predictions["Maazuddin"],
+    }).sort_values("Source row (0-based)")
+    selected_row = st.selectbox("Inspect a shared test sample (source row, 0-based)", table["Source row (0-based)"].tolist())
+    st.dataframe(
+        raw.loc[raw["source_row_index"] == selected_row, FEATURES + ["class"]],
+        width="stretch", hide_index=True,
+    )
+    st.dataframe(table.loc[table["Source row (0-based)"] == selected_row], width="stretch", hide_index=True)
+    disagreements = int(np.sum(predictions["Riddhi"] != predictions["Maazuddin"]))
+    st.caption(f"Models disagree on {disagreements} of {len(actual)} samples. Each row below is evaluated by both models.")
+    st.dataframe(table, width="stretch", hide_index=True)
+    st.download_button("Download paired predictions", table.to_csv(index=False),
+                       file_name="shared_test_predictions.csv", mime="text/csv")
+    with st.expander("Selection protocol and training settings"):
+        config = experiment["best_config"]
+        selected = metadata["selected"]
+        st.write(
+            f"Maazuddin: {len(metadata['candidates'])} existing profiles, "
+            f"{metadata['fold_count']} stratified development folds, "
+            f"optimizer seeds {metadata['search_seeds']} in each fold. "
+            f"Selection: {metadata['selection']} Final restart chosen by training accuracy only; "
+            f"seed {metadata['selected_final_seed']}. Fold scalers use fold-training rows only; "
+            "final scalers use development rows only. Both use Riddhi's saved split and fold seeds."
+        )
+        st.dataframe(pd.DataFrame([
+            {
+                "Model": "Riddhi", "Training objective": "BCE + weight-only L2",
+                "Particles": config["particles"], "Evaluations per fit": config["particles"] * (config["iterations"] + 1),
+                "CV-selected accuracy": experiment["selected_validation_accuracy"],
+            },
+            {
+                "Model": "Maazuddin", "Training objective": "Accuracy",
+                "Particles": selected["config"]["swarm_size"],
+                "Evaluations per fit": selected["config"]["max_evaluations"],
+                "CV-selected accuracy": selected["mean_accuracy"],
+            },
+        ]), width="stretch", hide_index=True)
+        st.json(selected["config"])
+        st.caption("Maazuddin's development-only candidate scores (not test rankings):")
+        st.dataframe(pd.DataFrame([
+            {"Group": row["config"]["group"], "Configuration": row["config"]["name"],
+             "Architecture": describe_layers(row["config"]["architecture"]),
+             "CV accuracy": row["mean_accuracy"], "Parameters": row["parameters"]}
+            for row in metadata["candidates"]
+        ]), width="stretch", hide_index=True)
+
+
 def show_test_tab(
     experiment: dict,
     model: dict[str, np.ndarray],
@@ -538,6 +764,16 @@ def show_test_tab(
 
     probabilities = ordered["probability_class_1"].to_numpy(dtype=float)
     actual = ordered["actual_class"].to_numpy(dtype=int)
+    if not np.isfinite(probabilities).all() or np.any((probabilities < 0) | (probabilities > 1)):
+        raise ValueError("Saved test probabilities must be finite values in [0, 1].")
+    config = experiment["best_config"]
+    st.markdown(
+        f"**Model:** Riddhi's {describe_layers([4, *config['hidden'], 1])} ANN "
+        f"({' → '.join(config['activations'])}); "
+        f"informant coefficient {config.get('c_informant', 0):g}, "
+        f"informant count {config.get('informant_count', 0)}. "
+        "The slider reclassifies saved probabilities; it does not retrain the model."
+    )
     initial_threshold = float(model["threshold"])
     threshold = st.slider(
         "Decision threshold",
@@ -548,6 +784,12 @@ def show_test_tab(
         help="Interactive what-if view only. The reported locked-test metrics were produced at threshold 0.50.",
     )
     predicted = (probabilities >= threshold).astype(int)
+    if np.array_equal(probabilities >= 0.05, probabilities >= 0.95):
+        st.info(
+            "The slider cannot change any prediction in its 0.05–0.95 range: "
+            "none of the saved probabilities falls where these thresholds would change its class. "
+            "Unchanged metrics here are expected, not evidence that the slider is broken."
+        )
     tn, fp, fn, tp = confusion_counts(actual, predicted)
     accuracy = float(np.mean(actual == predicted))
     precision = tp / (tp + fp) if tp + fp else 0.0
@@ -560,6 +802,39 @@ def show_test_tab(
     cards[2].metric("Precision · class 1", f"{precision:.2%}")
     cards[3].metric("Recall · class 1", f"{recall:.2%}")
     cards[4].metric("F1 · class 1", f"{f1:.2%}")
+    st.caption(
+        f"Correct: {int(np.sum(actual == predicted))}/{len(actual)} · "
+        f"Errors: {int(np.sum(actual != predicted))} at threshold {threshold:.2f}. "
+        "The four percentage metrics describe this one model on the same test examples."
+    )
+    with st.expander("Why can all four metrics be 100%? Inspect the probabilities"):
+        st.markdown(
+            "Accuracy, precision, recall and F1 all equal 100% when there are no classification "
+            "errors and both classes are present. That does not mean every architecture has "
+            "the same score, that the probabilities are exactly 0 or 1, or that future data "
+            "will also be classified perfectly. Scientific notation below preserves tiny probabilities."
+        )
+        summaries = []
+        for label in (0, 1):
+            values = probabilities[actual == label]
+            if len(values):
+                summaries.append(
+                    {
+                        "Actual class": label,
+                        "Examples": len(values),
+                        "Minimum P(class 1)": f"{values.min():.12g}",
+                        "Maximum P(class 1)": f"{values.max():.12g}",
+                    }
+                )
+        st.dataframe(pd.DataFrame(summaries), width="stretch", hide_index=True)
+        if np.any(actual == 0) and np.any(actual == 1):
+            max_negative = float(probabilities[actual == 0].max())
+            min_positive = float(probabilities[actual == 1].min())
+            if max_negative < min_positive:
+                st.caption(
+                    "Every example is classified correctly for any threshold t satisfying "
+                    f"{max_negative:.12g} < t ≤ {min_positive:.12g}."
+                )
 
     left, right = st.columns([0.85, 1.15], gap="large")
     with left:
@@ -904,29 +1179,21 @@ def main() -> None:
         unsafe_allow_html=True,
     )
 
-    results_dir = find_file(
-        [
-            SCRIPTS_DIR / "ann_results/riddhi_results.json",
-            WORKSPACE_ROOT / "ann_results/riddhi_results.json",
-        ],
-        "Riddhi's saved experiment results",
-    ).parent
-    data_path = find_file(
-        [
-            COURSEWORK_ROOT / "outline/data_banknote_authentication.txt",
-            COURSEWORK_ROOT / "data/raw/data_banknote_authentication.txt",
-            WORKSPACE_ROOT / "outline/data_banknote_authentication.txt",
-        ],
-        "Banknote Authentication data file",
-    )
     try:
+        data_path = find_file(
+            [
+                COURSEWORK_ROOT / "outline/data_banknote_authentication.txt",
+                COURSEWORK_ROOT / "data/raw/data_banknote_authentication.txt",
+            ],
+            "Banknote Authentication data file",
+        )
         raw, data, data_digest, repaired_labels = load_dataset(
             str(data_path), data_path.stat().st_mtime_ns
         )
-        riddhi_path = results_dir / "riddhi_results.json"
+        riddhi_path = RESULTS_DIR / "riddhi_results.json"
         maazuddin_path = find_file(
             [
-                SCRIPTS_DIR / "ann_results/maazuddin_results.json",
+                RESULTS_DIR / "maazuddin_results.json",
                 WORKSPACE_ROOT / "ann_results/maazuddin_results.json",
             ],
             "Maazuddin's saved experiment results",
@@ -934,39 +1201,24 @@ def main() -> None:
         riddhi_results = load_experiment(str(riddhi_path), riddhi_path.stat().st_mtime_ns)
         maazuddin_results = load_experiment(str(maazuddin_path), maazuddin_path.stat().st_mtime_ns)
         experiment = riddhi_results["experiment"]
-        notebook_artifacts = find_file(
-            [
-                results_dir / "best_model.npz",
-                WORKSPACE_ROOT / "ann_results/best_model.npz",
-            ],
-            "Riddhi's saved ANN model",
-        ).parent
-        predictions_path = notebook_artifacts / "test_predictions.csv"
-        model_path = notebook_artifacts / "best_model.npz"
-        predictions = load_predictions(str(predictions_path), predictions_path.stat().st_mtime_ns)
+        model_path = RESULTS_DIR / "best_model.npz"
         model = load_model(str(model_path), model_path.stat().st_mtime_ns)
     except (FileNotFoundError, ValueError, json.JSONDecodeError, KeyError) as error:
         st.error(f"Could not load the saved person-specific results: {error}")
-        st.code("python save_person_results.py")
+        st.code(f'python "{RIDDHI_ROOT / "Scripts" / "save_person_results.py"}"')
         st.stop()
 
-    data_tab, model_tab, people_tab, test_tab, pso_tab = st.tabs(
+    data_tab, comparison_tab, pso_tab = st.tabs(
         [
             "01  Data explorer",
-            "02  Riddhi's ANN architectures",
-            "03  People comparison",
-            "04  Test bench",
-            "05  PSO deep dive",
+            "02  Shared-test model comparison",
+            "03  PSO deep dive",
         ]
     )
     with data_tab:
         show_data_tab(raw, data, experiment, data_digest, repaired_labels)
-    with model_tab:
-        show_models_tab(experiment)
-    with people_tab:
-        show_people_tab(riddhi_results, maazuddin_results)
-    with test_tab:
-        show_test_tab(experiment, model, predictions, raw)
+    with comparison_tab:
+        show_shared_comparison(experiment, raw, data_digest)
     with pso_tab:
         show_pso_tab(experiment, model, maazuddin_results)
 

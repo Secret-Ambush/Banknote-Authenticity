@@ -1,0 +1,783 @@
+{
+  "data_sha256": "c276b8f8d9bd9b7f1be911873b8139aaecf82b3114e4d0bf75c06af6defeeb5f",
+  "source_hashes": {
+    "experiment.json": "04be9ebb51503088e007c2b032fe8e673f0f53aca403960ddf094079c24a2825",
+    "best_model.npz": "b7bae814c83698e8e6ff45eefc3cb58fb31770fd25ac535cb5b70dd32020e531",
+    "maazuddin_shared_model.npz": "5da58d8acb3db2c023e90e30742d02e2604b5a316eb4a6d0eb7ea6826edafe0c"
+  },
+  "selection": "Mean development CV accuracy descending, parameter count ascending, configuration order for ties.",
+  "fold_seed": 31415,
+  "fold_count": 3,
+  "search_seeds": [
+    11,
+    29
+  ],
+  "candidates": [
+    {
+      "config": {
+        "group": "architecture",
+        "name": "ANN 1",
+        "architecture": [
+          4,
+          4,
+          1
+        ],
+        "activation": "relu",
+        "swarm_size": 20,
+        "max_evaluations": 1000,
+        "alpha": 0.5,
+        "beta": 1.0,
+        "gamma": 1.0,
+        "delta": 1.0,
+        "epsilon": 1.0,
+        "informant_count": null
+      },
+      "scores": [
+        {
+          "fold": 1,
+          "seed": 11,
+          "accuracy": 0.9972222222222222
+        },
+        {
+          "fold": 1,
+          "seed": 29,
+          "accuracy": 0.9944444444444445
+        },
+        {
+          "fold": 2,
+          "seed": 11,
+          "accuracy": 0.9944444444444445
+        },
+        {
+          "fold": 2,
+          "seed": 29,
+          "accuracy": 0.9972222222222222
+        },
+        {
+          "fold": 3,
+          "seed": 11,
+          "accuracy": 0.994413407821229
+        },
+        {
+          "fold": 3,
+          "seed": 29,
+          "accuracy": 0.9972067039106145
+        }
+      ],
+      "mean_accuracy": 0.9958255741775295,
+      "parameters": 25
+    },
+    {
+      "config": {
+        "group": "architecture",
+        "name": "ANN 2",
+        "architecture": [
+          4,
+          8,
+          1
+        ],
+        "activation": "relu",
+        "swarm_size": 20,
+        "max_evaluations": 1000,
+        "alpha": 0.5,
+        "beta": 1.0,
+        "gamma": 1.0,
+        "delta": 1.0,
+        "epsilon": 1.0,
+        "informant_count": null
+      },
+      "scores": [
+        {
+          "fold": 1,
+          "seed": 11,
+          "accuracy": 0.9888888888888889
+        },
+        {
+          "fold": 1,
+          "seed": 29,
+          "accuracy": 0.9888888888888889
+        },
+        {
+          "fold": 2,
+          "seed": 11,
+          "accuracy": 0.9916666666666667
+        },
+        {
+          "fold": 2,
+          "seed": 29,
+          "accuracy": 0.9916666666666667
+        },
+        {
+          "fold": 3,
+          "seed": 11,
+          "accuracy": 0.9888268156424581
+        },
+        {
+          "fold": 3,
+          "seed": 29,
+          "accuracy": 0.994413407821229
+        }
+      ],
+      "mean_accuracy": 0.9907252224291331,
+      "parameters": 49
+    },
+    {
+      "config": {
+        "group": "architecture",
+        "name": "ANN 3",
+        "architecture": [
+          4,
+          16,
+          1
+        ],
+        "activation": "relu",
+        "swarm_size": 20,
+        "max_evaluations": 1000,
+        "alpha": 0.5,
+        "beta": 1.0,
+        "gamma": 1.0,
+        "delta": 1.0,
+        "epsilon": 1.0,
+        "informant_count": null
+      },
+      "scores": [
+        {
+          "fold": 1,
+          "seed": 11,
+          "accuracy": 0.9861111111111112
+        },
+        {
+          "fold": 1,
+          "seed": 29,
+          "accuracy": 0.9944444444444445
+        },
+        {
+          "fold": 2,
+          "seed": 11,
+          "accuracy": 1.0
+        },
+        {
+          "fold": 2,
+          "seed": 29,
+          "accuracy": 1.0
+        },
+        {
+          "fold": 3,
+          "seed": 11,
+          "accuracy": 1.0
+        },
+        {
+          "fold": 3,
+          "seed": 29,
+          "accuracy": 0.9972067039106145
+        }
+      ],
+      "mean_accuracy": 0.9962937099110284,
+      "parameters": 97
+    },
+    {
+      "config": {
+        "group": "architecture",
+        "name": "ANN 4",
+        "architecture": [
+          4,
+          8,
+          4,
+          1
+        ],
+        "activation": "relu",
+        "swarm_size": 20,
+        "max_evaluations": 1000,
+        "alpha": 0.5,
+        "beta": 1.0,
+        "gamma": 1.0,
+        "delta": 1.0,
+        "epsilon": 1.0,
+        "informant_count": null
+      },
+      "scores": [
+        {
+          "fold": 1,
+          "seed": 11,
+          "accuracy": 1.0
+        },
+        {
+          "fold": 1,
+          "seed": 29,
+          "accuracy": 0.9916666666666667
+        },
+        {
+          "fold": 2,
+          "seed": 11,
+          "accuracy": 0.9972222222222222
+        },
+        {
+          "fold": 2,
+          "seed": 29,
+          "accuracy": 1.0
+        },
+        {
+          "fold": 3,
+          "seed": 11,
+          "accuracy": 0.9972067039106145
+        },
+        {
+          "fold": 3,
+          "seed": 29,
+          "accuracy": 1.0
+        }
+      ],
+      "mean_accuracy": 0.9976825987999173,
+      "parameters": 81
+    },
+    {
+      "config": {
+        "group": "architecture",
+        "name": "ANN 5",
+        "architecture": [
+          4,
+          16,
+          8,
+          1
+        ],
+        "activation": "relu",
+        "swarm_size": 20,
+        "max_evaluations": 1000,
+        "alpha": 0.5,
+        "beta": 1.0,
+        "gamma": 1.0,
+        "delta": 1.0,
+        "epsilon": 1.0,
+        "informant_count": null
+      },
+      "scores": [
+        {
+          "fold": 1,
+          "seed": 11,
+          "accuracy": 0.9888888888888889
+        },
+        {
+          "fold": 1,
+          "seed": 29,
+          "accuracy": 1.0
+        },
+        {
+          "fold": 2,
+          "seed": 11,
+          "accuracy": 1.0
+        },
+        {
+          "fold": 2,
+          "seed": 29,
+          "accuracy": 1.0
+        },
+        {
+          "fold": 3,
+          "seed": 11,
+          "accuracy": 0.9972067039106145
+        },
+        {
+          "fold": 3,
+          "seed": 29,
+          "accuracy": 0.994413407821229
+        }
+      ],
+      "mean_accuracy": 0.9967515001034554,
+      "parameters": 225
+    },
+    {
+      "config": {
+        "group": "activation",
+        "name": "Sigmoid",
+        "architecture": [
+          4,
+          8,
+          1
+        ],
+        "activation": "sigmoid",
+        "swarm_size": 20,
+        "max_evaluations": 1000,
+        "alpha": 0.5,
+        "beta": 1.0,
+        "gamma": 1.0,
+        "delta": 1.0,
+        "epsilon": 1.0,
+        "informant_count": null
+      },
+      "scores": [
+        {
+          "fold": 1,
+          "seed": 11,
+          "accuracy": 0.9861111111111112
+        },
+        {
+          "fold": 1,
+          "seed": 29,
+          "accuracy": 0.9888888888888889
+        },
+        {
+          "fold": 2,
+          "seed": 11,
+          "accuracy": 1.0
+        },
+        {
+          "fold": 2,
+          "seed": 29,
+          "accuracy": 0.9888888888888889
+        },
+        {
+          "fold": 3,
+          "seed": 11,
+          "accuracy": 0.9972067039106145
+        },
+        {
+          "fold": 3,
+          "seed": 29,
+          "accuracy": 0.9916201117318436
+        }
+      ],
+      "mean_accuracy": 0.9921192840885579,
+      "parameters": 49
+    },
+    {
+      "config": {
+        "group": "activation",
+        "name": "ReLU",
+        "architecture": [
+          4,
+          8,
+          1
+        ],
+        "activation": "relu",
+        "swarm_size": 20,
+        "max_evaluations": 1000,
+        "alpha": 0.5,
+        "beta": 1.0,
+        "gamma": 1.0,
+        "delta": 1.0,
+        "epsilon": 1.0,
+        "informant_count": null
+      },
+      "scores": [
+        {
+          "fold": 1,
+          "seed": 11,
+          "accuracy": 0.9888888888888889
+        },
+        {
+          "fold": 1,
+          "seed": 29,
+          "accuracy": 0.9888888888888889
+        },
+        {
+          "fold": 2,
+          "seed": 11,
+          "accuracy": 0.9916666666666667
+        },
+        {
+          "fold": 2,
+          "seed": 29,
+          "accuracy": 0.9916666666666667
+        },
+        {
+          "fold": 3,
+          "seed": 11,
+          "accuracy": 0.9888268156424581
+        },
+        {
+          "fold": 3,
+          "seed": 29,
+          "accuracy": 0.994413407821229
+        }
+      ],
+      "mean_accuracy": 0.9907252224291331,
+      "parameters": 49
+    },
+    {
+      "config": {
+        "group": "activation",
+        "name": "Tanh",
+        "architecture": [
+          4,
+          8,
+          1
+        ],
+        "activation": "tanh",
+        "swarm_size": 20,
+        "max_evaluations": 1000,
+        "alpha": 0.5,
+        "beta": 1.0,
+        "gamma": 1.0,
+        "delta": 1.0,
+        "epsilon": 1.0,
+        "informant_count": null
+      },
+      "scores": [
+        {
+          "fold": 1,
+          "seed": 11,
+          "accuracy": 0.9972222222222222
+        },
+        {
+          "fold": 1,
+          "seed": 29,
+          "accuracy": 0.9833333333333333
+        },
+        {
+          "fold": 2,
+          "seed": 11,
+          "accuracy": 0.9944444444444445
+        },
+        {
+          "fold": 2,
+          "seed": 29,
+          "accuracy": 1.0
+        },
+        {
+          "fold": 3,
+          "seed": 11,
+          "accuracy": 0.9972067039106145
+        },
+        {
+          "fold": 3,
+          "seed": 29,
+          "accuracy": 1.0
+        }
+      ],
+      "mean_accuracy": 0.9953677839851025,
+      "parameters": 49
+    },
+    {
+      "config": {
+        "group": "budget",
+        "name": "Swarm 10",
+        "architecture": [
+          4,
+          8,
+          1
+        ],
+        "activation": "relu",
+        "swarm_size": 10,
+        "max_evaluations": 500,
+        "alpha": 0.5,
+        "beta": 1.0,
+        "gamma": 1.0,
+        "delta": 1.0,
+        "epsilon": 1.0,
+        "informant_count": null
+      },
+      "scores": [
+        {
+          "fold": 1,
+          "seed": 11,
+          "accuracy": 0.9972222222222222
+        },
+        {
+          "fold": 1,
+          "seed": 29,
+          "accuracy": 0.9916666666666667
+        },
+        {
+          "fold": 2,
+          "seed": 11,
+          "accuracy": 0.9972222222222222
+        },
+        {
+          "fold": 2,
+          "seed": 29,
+          "accuracy": 0.9888888888888889
+        },
+        {
+          "fold": 3,
+          "seed": 11,
+          "accuracy": 1.0
+        },
+        {
+          "fold": 3,
+          "seed": 29,
+          "accuracy": 0.9916201117318436
+        }
+      ],
+      "mean_accuracy": 0.9944366852886405,
+      "parameters": 49
+    },
+    {
+      "config": {
+        "group": "budget",
+        "name": "Swarm 50",
+        "architecture": [
+          4,
+          8,
+          1
+        ],
+        "activation": "relu",
+        "swarm_size": 50,
+        "max_evaluations": 500,
+        "alpha": 0.5,
+        "beta": 1.0,
+        "gamma": 1.0,
+        "delta": 1.0,
+        "epsilon": 1.0,
+        "informant_count": null
+      },
+      "scores": [
+        {
+          "fold": 1,
+          "seed": 11,
+          "accuracy": 0.9888888888888889
+        },
+        {
+          "fold": 1,
+          "seed": 29,
+          "accuracy": 0.9916666666666667
+        },
+        {
+          "fold": 2,
+          "seed": 11,
+          "accuracy": 0.9972222222222222
+        },
+        {
+          "fold": 2,
+          "seed": 29,
+          "accuracy": 0.9888888888888889
+        },
+        {
+          "fold": 3,
+          "seed": 11,
+          "accuracy": 1.0
+        },
+        {
+          "fold": 3,
+          "seed": 29,
+          "accuracy": 0.9916201117318436
+        }
+      ],
+      "mean_accuracy": 0.9930477963997517,
+      "parameters": 49
+    },
+    {
+      "config": {
+        "group": "coefficients",
+        "name": "Balanced",
+        "architecture": [
+          4,
+          8,
+          1
+        ],
+        "activation": "relu",
+        "swarm_size": 20,
+        "max_evaluations": 1000,
+        "alpha": 0.5,
+        "beta": 1.0,
+        "gamma": 1.0,
+        "delta": 1.0,
+        "epsilon": 1.0,
+        "informant_count": 3
+      },
+      "scores": [
+        {
+          "fold": 1,
+          "seed": 11,
+          "accuracy": 0.9888888888888889
+        },
+        {
+          "fold": 1,
+          "seed": 29,
+          "accuracy": 0.9888888888888889
+        },
+        {
+          "fold": 2,
+          "seed": 11,
+          "accuracy": 0.9916666666666667
+        },
+        {
+          "fold": 2,
+          "seed": 29,
+          "accuracy": 0.9916666666666667
+        },
+        {
+          "fold": 3,
+          "seed": 11,
+          "accuracy": 0.9888268156424581
+        },
+        {
+          "fold": 3,
+          "seed": 29,
+          "accuracy": 0.994413407821229
+        }
+      ],
+      "mean_accuracy": 0.9907252224291331,
+      "parameters": 49
+    },
+    {
+      "config": {
+        "group": "coefficients",
+        "name": "Cognitive emphasis",
+        "architecture": [
+          4,
+          8,
+          1
+        ],
+        "activation": "relu",
+        "swarm_size": 20,
+        "max_evaluations": 1000,
+        "alpha": 0.5,
+        "beta": 1.5,
+        "gamma": 0.75,
+        "delta": 0.75,
+        "epsilon": 1.0,
+        "informant_count": 3
+      },
+      "scores": [
+        {
+          "fold": 1,
+          "seed": 11,
+          "accuracy": 0.9944444444444445
+        },
+        {
+          "fold": 1,
+          "seed": 29,
+          "accuracy": 0.9861111111111112
+        },
+        {
+          "fold": 2,
+          "seed": 11,
+          "accuracy": 0.9972222222222222
+        },
+        {
+          "fold": 2,
+          "seed": 29,
+          "accuracy": 0.9916666666666667
+        },
+        {
+          "fold": 3,
+          "seed": 11,
+          "accuracy": 0.994413407821229
+        },
+        {
+          "fold": 3,
+          "seed": 29,
+          "accuracy": 0.9832402234636871
+        }
+      ],
+      "mean_accuracy": 0.9911830126215602,
+      "parameters": 49
+    },
+    {
+      "config": {
+        "group": "coefficients",
+        "name": "Social emphasis",
+        "architecture": [
+          4,
+          8,
+          1
+        ],
+        "activation": "relu",
+        "swarm_size": 20,
+        "max_evaluations": 1000,
+        "alpha": 0.5,
+        "beta": 0.75,
+        "gamma": 1.125,
+        "delta": 1.125,
+        "epsilon": 1.0,
+        "informant_count": 3
+      },
+      "scores": [
+        {
+          "fold": 1,
+          "seed": 11,
+          "accuracy": 0.9916666666666667
+        },
+        {
+          "fold": 1,
+          "seed": 29,
+          "accuracy": 0.9888888888888889
+        },
+        {
+          "fold": 2,
+          "seed": 11,
+          "accuracy": 0.9972222222222222
+        },
+        {
+          "fold": 2,
+          "seed": 29,
+          "accuracy": 0.9888888888888889
+        },
+        {
+          "fold": 3,
+          "seed": 11,
+          "accuracy": 1.0
+        },
+        {
+          "fold": 3,
+          "seed": 29,
+          "accuracy": 0.9916201117318436
+        }
+      ],
+      "mean_accuracy": 0.9930477963997517,
+      "parameters": 49
+    }
+  ],
+  "selected": {
+    "config": {
+      "group": "architecture",
+      "name": "ANN 4",
+      "architecture": [
+        4,
+        8,
+        4,
+        1
+      ],
+      "activation": "relu",
+      "swarm_size": 20,
+      "max_evaluations": 1000,
+      "alpha": 0.5,
+      "beta": 1.0,
+      "gamma": 1.0,
+      "delta": 1.0,
+      "epsilon": 1.0,
+      "informant_count": null
+    },
+    "scores": [
+      {
+        "fold": 1,
+        "seed": 11,
+        "accuracy": 1.0
+      },
+      {
+        "fold": 1,
+        "seed": 29,
+        "accuracy": 0.9916666666666667
+      },
+      {
+        "fold": 2,
+        "seed": 11,
+        "accuracy": 0.9972222222222222
+      },
+      {
+        "fold": 2,
+        "seed": 29,
+        "accuracy": 1.0
+      },
+      {
+        "fold": 3,
+        "seed": 11,
+        "accuracy": 0.9972067039106145
+      },
+      {
+        "fold": 3,
+        "seed": 29,
+        "accuracy": 1.0
+      }
+    ],
+    "mean_accuracy": 0.9976825987999173,
+    "parameters": 81
+  },
+  "selected_final_seed": 101,
+  "training_accuracy": 1.0,
+  "final_seeds": [
+    101,
+    202,
+    303
+  ]
+}
