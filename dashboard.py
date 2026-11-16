@@ -583,12 +583,6 @@ def show_shared_comparison(experiment: dict, raw: pd.DataFrame, data_digest: str
         f"from both training and CV. Shared development set: {len(riddhi['development_indices'])} rows. "
         "Decision threshold is fixed at 0.50 for both; neither model is selected by these test scores."
     )
-    st.warning(
-        "Maazuddin's model is newly selected by development CV and trained on the shared split, "
-        "not taken from his historical 70/30 experiment. The test set has already been inspected. "
-        "Training objectives, budgets and search spaces differ, so this is not an architecture-only "
-        "or contributor-only ranking. Details are under Selection protocol below."
-    )
     for column, (owner, model) in zip(st.columns(2, gap="large"), models.items()):
         with column:
             st.plotly_chart(architecture_figure(model, owner), width="stretch", config={"displaylogo": False})
@@ -686,56 +680,30 @@ def show_shared_comparison(experiment: dict, raw: pd.DataFrame, data_digest: str
     fig.update_yaxes(title="True-positive rate", range=[0, 1])
     st.plotly_chart(fig, width="stretch", config={"displaylogo": False})
 
-    st.markdown("#### Compare individual test samples")
-    table = pd.DataFrame({
-        "Source row (0-based)": rows["original_row_index"], "Actual class": actual,
-        "Riddhi P(class 1)": rows["Riddhi"], "Riddhi prediction": predictions["Riddhi"],
-        "Maazuddin P(class 1)": rows["Maazuddin"], "Maazuddin prediction": predictions["Maazuddin"],
-        "Models agree": predictions["Riddhi"] == predictions["Maazuddin"],
-    }).sort_values("Source row (0-based)")
-    selected_row = st.selectbox("Inspect a shared test sample (source row, 0-based)", table["Source row (0-based)"].tolist())
-    st.dataframe(
-        raw.loc[raw["source_row_index"] == selected_row, FEATURES + ["class"]],
-        width="stretch", hide_index=True,
+    st.markdown("### Selection protocol and training settings")
+    config = experiment["best_config"]
+    selected = metadata["selected"]
+    st.write(
+        f"Maazuddin: {len(metadata['candidates'])} existing profiles, "
+        f"{metadata['fold_count']} stratified development folds, "
+        f"optimizer seeds {metadata['search_seeds']} in each fold. "
+        f"Selection: {metadata['selection']} Final restart chosen by training accuracy only; "
+        f"seed {metadata['selected_final_seed']}. Fold scalers use fold-training rows only; "
+        "final scalers use development rows only. Both use Riddhi's saved split and fold seeds."
     )
-    st.dataframe(table.loc[table["Source row (0-based)"] == selected_row], width="stretch", hide_index=True)
-    disagreements = int(np.sum(predictions["Riddhi"] != predictions["Maazuddin"]))
-    st.caption(f"Models disagree on {disagreements} of {len(actual)} samples. Each row below is evaluated by both models.")
-    st.dataframe(table, width="stretch", hide_index=True)
-    st.download_button("Download paired predictions", table.to_csv(index=False),
-                       file_name="shared_test_predictions.csv", mime="text/csv")
-    with st.expander("Selection protocol and training settings"):
-        config = experiment["best_config"]
-        selected = metadata["selected"]
-        st.write(
-            f"Maazuddin: {len(metadata['candidates'])} existing profiles, "
-            f"{metadata['fold_count']} stratified development folds, "
-            f"optimizer seeds {metadata['search_seeds']} in each fold. "
-            f"Selection: {metadata['selection']} Final restart chosen by training accuracy only; "
-            f"seed {metadata['selected_final_seed']}. Fold scalers use fold-training rows only; "
-            "final scalers use development rows only. Both use Riddhi's saved split and fold seeds."
-        )
-        st.dataframe(pd.DataFrame([
-            {
-                "Model": "Riddhi", "Training objective": "BCE + weight-only L2",
-                "Particles": config["particles"], "Evaluations per fit": config["particles"] * (config["iterations"] + 1),
-                "CV-selected accuracy": experiment["selected_validation_accuracy"],
-            },
-            {
-                "Model": "Maazuddin", "Training objective": "Accuracy",
-                "Particles": selected["config"]["swarm_size"],
-                "Evaluations per fit": selected["config"]["max_evaluations"],
-                "CV-selected accuracy": selected["mean_accuracy"],
-            },
-        ]), width="stretch", hide_index=True)
-        st.json(selected["config"])
-        st.caption("Maazuddin's development-only candidate scores (not test rankings):")
-        st.dataframe(pd.DataFrame([
-            {"Group": row["config"]["group"], "Configuration": row["config"]["name"],
-             "Architecture": describe_layers(row["config"]["architecture"]),
-             "CV accuracy": row["mean_accuracy"], "Parameters": row["parameters"]}
-            for row in metadata["candidates"]
-        ]), width="stretch", hide_index=True)
+    st.dataframe(pd.DataFrame([
+        {
+            "Model": "Riddhi", "Training objective": "BCE + weight-only L2",
+            "Particles": config["particles"], "Evaluations per fit": config["particles"] * (config["iterations"] + 1),
+            "CV-selected accuracy": experiment["selected_validation_accuracy"],
+        },
+        {
+            "Model": "Maazuddin", "Training objective": "Accuracy",
+            "Particles": selected["config"]["swarm_size"],
+            "Evaluations per fit": selected["config"]["max_evaluations"],
+            "CV-selected accuracy": selected["mean_accuracy"],
+        },
+    ]), width="stretch", hide_index=True)
 
 
 def show_test_tab(
@@ -916,14 +884,19 @@ def show_pso_equations(experiment: dict, maazuddin: dict) -> None:
         for group, results in maazuddin["groups"].items()
         for row in results["summary"]
     ]
-    labels = [label for label, _ in profiles]
-    chosen = st.selectbox(
-        "Maazuddin's saved PSO configuration",
-        labels,
-        index=labels.index("Coefficient · Balanced"),
-        key="pso_configuration",
-    )
-    profile = profiles[labels.index(chosen)][1]
+    profile_frame = pd.DataFrame([{
+        "Configuration": label,
+        "Inertia weight": row["alpha"], "Cognitive weight": row["beta"],
+        "Social weight": row["gamma"], "Global weight": row["delta"],
+        "Movement scale": row["epsilon"], "Particles": row["swarm_size"],
+        "Evaluation budget": row["max_evaluations"],
+        "Informants": row["informant_count"] if row["informant_count"] is not None else min(3, row["swarm_size"]),
+    } for label, row in profiles])
+
+    def saved_range(column: str) -> str:
+        values = profile_frame[column]
+        low, high = values.min(), values.max()
+        return f"**{low:g}** (all configurations)" if low == high else f"**{low:g} to {high:g}**"
 
     left, right = st.columns(2, gap="large")
     with left:
@@ -941,23 +914,22 @@ def show_pso_equations(experiment: dict, maazuddin: dict) -> None:
         )
         start, end = config["inertia"]
         st.markdown(
-            f"- **Inertia:** decreases linearly from **{start:g}** to **{end:g}** "
+            f"- **Inertia weight:** decreases linearly from **{start:g}** to **{end:g}** "
             f"over **{config['iterations']}** velocity updates.\n"
-            f"- **Personal/cognitive:** c₁ = **{config['c1']:g}**.\n"
-            f"- **Global/social:** c₂ = **{config['c2']:g}**.\n"
-            f"- **Informant coefficient:** **{informant_coefficient:g}**.\n"
-            "- Each active random multiplier is independently sampled from Uniform(0, 1) "
-            "per particle, coordinate and update.\n"
-            "- These are the saved final settings, selected by CV accuracy, then BCE, then "
+            f"- **Cognitive weight:** c₁ = **{config['c1']:g}**, towards personal best.\n"
+            f"- **Social weight:** c_informant = **{informant_coefficient:g}**, towards informant best.\n"
+            f"- **Global weight:** c₂ = **{config['c2']:g}**, towards swarm best.\n"
+            "- **Movement scale:** **1**, implicit in the position update.\n"
+            + (
+                f"- **Informants:** **{config['informant_count']}**, including the particle itself; "
+                "the others are randomly resampled without replacement on each update.\n"
+                if informant_coefficient > 0
+                else "- **Informants:** attraction disabled in this saved run.\n"
+            )
+            + "- These are the saved final settings, selected by CV accuracy, then BCE, then "
             "parameter count—not by test performance."
         )
-        if informant_coefficient > 0:
-            st.markdown(
-                f"- **Informants:** **{config['informant_count']}**, including self. "
-                "The others are resampled without replacement per particle and update; "
-                "the target is their lowest-loss personal best."
-            )
-        else:
+        if informant_coefficient <= 0:
             st.warning(
                 "This saved run has no informant attraction. The notebook source now supports "
                 "c_informant and informant_count, but these historical results have not been "
@@ -966,6 +938,9 @@ def show_pso_equations(experiment: dict, maazuddin: dict) -> None:
             )
         velocity_limit = 2 * config["bound"] * config["velocity_fraction"]
         st.caption(
+            "Each active random multiplier is an independent Uniform(0, 1) draw per coordinate "
+            "and update, scaled by its coefficient. The informant target is the lowest-loss "
+            "personal best among the selected informants. "
             f"The implemented velocity is then clipped to ±{velocity_limit:g}; positions "
             f"are clipped to ±{config['bound']:g}, with velocity zeroed at clipped coordinates. "
             "The objective is training binary cross-entropy plus an L2 weight penalty (lower is better)."
@@ -982,18 +957,18 @@ def show_pso_equations(experiment: dict, maazuddin: dict) -> None:
             r"b\sim U(0,\beta),\quad c\sim U(0,\gamma),\quad d\sim U(0,\delta)"
         )
         st.latex(r"x_{i,d}^{t+1}=x_{i,d}^{t}+\epsilon v_{i,d}^{t+1}")
-        informants = profile["informant_count"]
-        if informants is None:
-            informants = min(3, profile["swarm_size"])
         st.markdown(
-            f"- **Inertia:** α = **{profile['alpha']:g}**, fixed throughout the run.\n"
-            f"- **Personal/cognitive limit:** β = **{profile['beta']:g}**.\n"
-            f"- **Informant/social limit:** γ = **{profile['gamma']:g}**.\n"
-            f"- **Whole-swarm/global limit:** δ = **{profile['delta']:g}**.\n"
-            f"- **Movement scale:** ε = **{profile['epsilon']:g}**.\n"
-            f"- **Informants:** **{informants}**, including the particle itself; the others "
+            f"- **Inertia weight:** α = {saved_range('Inertia weight')}; constant during training.\n"
+            f"- **Cognitive weight:** β = {saved_range('Cognitive weight')}, towards personal best.\n"
+            f"- **Social weight:** γ = {saved_range('Social weight')}, towards informant best.\n"
+            f"- **Global weight:** δ = {saved_range('Global weight')}, towards swarm best.\n"
+            f"- **Movement scale:** ε = {saved_range('Movement scale')}.\n"
+            f"- **Particles:** {saved_range('Particles')}.\n"
+            f"- **Evaluation budget:** {saved_range('Evaluation budget')} objective evaluations per fit.\n"
+            f"- **Informants:** {saved_range('Informants')}, including the particle itself; the others "
             "are randomly resampled without replacement on each update.\n"
-            "- These values are fixed experiment profiles, not adaptively learned coefficients."
+            "- Ranges describe differences across saved configurations, not a decrease over iterations. "
+            "All four configured weights remain fixed within each run; only the random draws change."
         )
         st.caption(
             "b, c and d are independent draws per coordinate and update. The informant target "
@@ -1005,50 +980,83 @@ def show_pso_equations(experiment: dict, maazuddin: dict) -> None:
     st.markdown("#### Which knowledge receives more weight?")
     expected = pd.DataFrame(
         [
-            {"Person": "Riddhi", "Knowledge": "Personal", "Expected coefficient": config["c1"] / 2},
-            {"Person": "Riddhi", "Knowledge": "Informants", "Expected coefficient": informant_coefficient / 2},
-            {"Person": "Riddhi", "Knowledge": "Global", "Expected coefficient": config["c2"] / 2},
-            {"Person": "Maazuddin", "Knowledge": "Personal", "Expected coefficient": profile["beta"] / 2},
-            {"Person": "Maazuddin", "Knowledge": "Informants", "Expected coefficient": profile["gamma"] / 2},
-            {"Person": "Maazuddin", "Knowledge": "Global", "Expected coefficient": profile["delta"] / 2},
+            {"Person": "Riddhi", "Knowledge": "Cognitive weight", "Expected coefficient": config["c1"] / 2},
+            {"Person": "Riddhi", "Knowledge": "Social weight", "Expected coefficient": informant_coefficient / 2},
+            {"Person": "Riddhi", "Knowledge": "Global weight", "Expected coefficient": config["c2"] / 2},
         ]
     )
+    expected["Minimum"] = expected["Expected coefficient"]
+    expected["Maximum"] = expected["Expected coefficient"]
+    expected = pd.concat([expected, pd.DataFrame([
+        {
+            "Person": "Maazuddin", "Knowledge": weight,
+            "Expected coefficient": (profile_frame[weight].min() + profile_frame[weight].max()) / 4,
+            "Minimum": profile_frame[weight].min() / 2,
+            "Maximum": profile_frame[weight].max() / 2,
+        }
+        for weight in ("Cognitive weight", "Social weight", "Global weight")
+    ])], ignore_index=True)
+    expected["Range below"] = expected["Expected coefficient"] - expected["Minimum"]
+    expected["Range above"] = expected["Maximum"] - expected["Expected coefficient"]
     fig = px.bar(
         expected,
         x="Knowledge",
         y="Expected coefficient",
         color="Person",
         barmode="group",
+        error_y="Range above",
+        error_y_minus="Range below",
+        hover_data={"Minimum": True, "Maximum": True, "Range above": False, "Range below": False},
         color_discrete_map={"Riddhi": "#54d6a0", "Maazuddin": "#87a9ff"},
     )
     chart_layout(fig, 340)
     st.plotly_chart(fig, width="stretch", config={"displaylogo": False})
     st.caption(
-        "Expected means average random multiplier: the mean of Uniform(0, a) is a/2. "
+        "The expected random multiplier for weight a is a/2. Riddhi's bars show the saved run. "
+        "Maazuddin's bars mark the midpoint of the saved minimum–maximum expected multipliers; "
+        "error bars show that full range across configurations, not uncertainty or a training schedule. "
+        "A midpoint need not be a setting used in any run. "
         "These bars are coefficient comparisons, not measured particle movements or percentages. "
-        "Inertia is separate: it carries existing velocity, not a particular knowledge source."
+        "The inertia weight is separate: it carries existing velocity, not a particular knowledge source."
     )
     st.markdown(
-        f"**Riddhi (saved run):** personal coefficient {config['c1']:g} versus combined "
-        f"informant/global coefficient {informant_coefficient + config['c2']:g}. "
+        "**Riddhi's saved coefficient settings:**\n"
+        f"- **Inertia weight:** w decreases from **{start:g}** to **{end:g}**.\n"
+        f"- **Cognitive weight:** c₁ = **{config['c1']:g}**, with expected multiplier "
+        f"**{config['c1'] / 2:g}**.\n"
+        f"- **Social weight:** c_informant = **{informant_coefficient:g}**, with expected "
+        f"multiplier **{informant_coefficient / 2:g}**.\n"
+        f"- **Global weight:** c₂ = **{config['c2']:g}**, with expected multiplier "
+        f"**{config['c2'] / 2:g}**.\n"
+        f"- **Combined social + global weights:** coefficient budget "
+        f"**{informant_coefficient + config['c2']:g}**, versus cognitive weight "
+        f"**{config['c1']:g}**. "
         + (
             "The configured attraction favours individual experience."
             if config["c1"] > config["c2"] + informant_coefficient
             else "The combined configured attraction favours shared knowledge."
             if config["c2"] + informant_coefficient > config["c1"]
-            else "The personal and combined shared coefficient budgets are equal."
+            else "The cognitive and combined social/global coefficient budgets are equal."
         )
+        + "\n- These values describe the selected saved run, not every architecture or refinement profile."
     )
     st.markdown(
         "**Maazuddin's saved coefficient profiles:**\n"
-        "- **Balanced:** β = γ = δ = 1. Each source has the same expected multiplier, "
-        "but informant + global coefficients together are twice the personal coefficient.\n"
-        "- **Cognitive emphasis:** β = 1.5, γ = δ = 0.75. Personal is twice either shared "
-        "source individually, but equals their combined coefficient budget.\n"
-        "- **Social emphasis:** β = 0.75, γ = δ = 1.125. The combined shared-knowledge "
-        "coefficient budget is three times the personal one.\n"
+        "- **Inertia weight:** α = **0.5** for all saved profiles.\n"
+        "- **Balanced:** cognitive weight β = **1**, social weight γ = **1**, "
+        "global weight δ = **1**. Social + global weights together are twice the cognitive weight.\n"
+        "- **Cognitive emphasis:** cognitive weight β = **1.5**, social weight γ = **0.75**, "
+        "global weight δ = **0.75**. The cognitive weight equals the combined social + global weights.\n"
+        "- **Social emphasis:** cognitive weight β = **0.75**, social weight γ = **1.125**, "
+        "global weight δ = **1.125**. Combined social + global weights are three times the cognitive weight.\n"
         "- The architecture, activation, budget and pilot groups use the balanced coefficients."
     )
+    with st.expander("All Maazuddin PSO configurations"):
+        st.caption(
+            "Every saved configuration is listed together. Default informant counts are resolved "
+            "to min(3, particles). Coefficients do not decrease during a run."
+        )
+        st.dataframe(profile_frame, width="stretch", hide_index=True)
     st.info(
         "Larger coefficients do not guarantee larger actual movements: each term also depends "
         "on a fresh random draw and the distance/direction to its target. Terms can reinforce or "
@@ -1064,8 +1072,8 @@ def show_pso_tab(experiment: dict, model: dict[str, np.ndarray], maazuddin: dict
     first, second, third, fourth = st.columns(4)
     first.metric("Particles", str(config["particles"]))
     second.metric("Iterations", str(config["iterations"]))
-    third.metric("Cognitive c₁", f"{config['c1']:.2f}")
-    fourth.metric("Social c₂", f"{config['c2']:.2f}")
+    third.metric("Cognitive weight c₁", f"{config['c1']:.2f}")
+    fourth.metric("Global weight c₂", f"{config['c2']:.2f}")
     st.caption(
         f"Selected architecture [{', '.join(map(str, config['hidden']))}] with "
         f"{' → '.join(config['activations'])}; {model['parameters'].size} trainable parameters. "

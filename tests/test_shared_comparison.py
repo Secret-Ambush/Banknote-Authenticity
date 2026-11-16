@@ -165,13 +165,29 @@ def test_architecture_diagrams_include_every_neuron_and_edge():
         assert len(figure.layout.annotations) == len(layers)
 
 
-def test_dashboard_consolidates_tabs_and_pairs_sample_rows():
+def test_dashboard_summarises_all_pso_configurations_without_dropdown():
     app = AppTest.from_file(str(ROOT / "dashboard.py"), default_timeout=45).run()
     assert not app.exception
     assert not app.error
     assert [tab.label for tab in app.tabs] == [
         "01  Data explorer", "02  Shared-test model comparison", "03  PSO deep dive",
     ]
+    assert not any(widget.key == "pso_configuration" for widget in app.selectbox)
+    text = "\n".join(item.value for item in app.markdown)
+    assert "β = **0.75 to 1.5**" in text
+    assert "γ = **0.75 to 1.125**" in text
+    assert "δ = **0.75 to 1.125**" in text
+    assert "not a decrease over iterations" in text
+    configs = next(frame.value for frame in app.dataframe if "Evaluation budget" in frame.value.columns)
+    assert len(configs) == 18
+    assert set(configs["Inertia weight"]) == {0.5}
+    assert set(configs["Informants"]) == {3}
+
+
+def test_dashboard_consolidates_tabs_and_pairs_sample_rows():
+    app = AppTest.from_file(str(ROOT / "dashboard.py"), default_timeout=45).run()
+    assert not app.exception
+    assert not app.error
     selector = next(widget for widget in app.selectbox if widget.label.startswith("Inspect a shared test sample"))
     assert len(selector.options) == 270
     selector.select_index(269).run()

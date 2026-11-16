@@ -9,8 +9,12 @@ The app has three tabs: "Data explorer", "Shared-test model comparison", and
 confusion matrices, ROC curves and a sample inspector/download. The PSO deep dive
 shows each implementation's velocity and position equations, saved coefficients,
 inertia schedules, and expected random attraction multipliers. Maazuddin's saved
-configuration can be selected to inspect its personal, informant, and global
-weights. These coefficient comparisons are not measured movement contributions;
+configurations are summarised as ranges of inertia, cognitive, social and global
+weights, with all configurations available in one expandable table rather than
+a dropdown. His configured weights stay constant within a run; ranges are across
+configurations, not decreasing schedules. The multiplier plot shows his full
+minimum–maximum range, with bars at the range midpoints, not averages of runs.
+These coefficient comparisons are not measured movement contributions;
 the saved results do not contain per-particle term histories.
 
 ## Informant-enabled notebook PSO
