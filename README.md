@@ -10,9 +10,10 @@ The later coursework stages require a from-scratch ANN, a from-scratch informant
 
 Streamlit app displaying EDA and comparing model architectures and how configuration make a difference in the predictions
 
-![alt text](<Screenshots/Screenshot 2026-11-15 at 9.51.47 pm.png>)
-![alt text](Screenshots/image-1.png)
-![alt text](Screenshots/image.png)
+![alt text](<Screenshots/EDA.png>)
+![alt text](Screenshots/FeatureDistribution.png)
+![alt text](Screenshots/Best_ANN_Networks.png)
+![alt text](Screenshots/PSO_Analysis.png)
 
 ## Structure
 
