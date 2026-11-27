@@ -71,3 +71,10 @@ set_parameter_vector(network, parameters)
 ```
 
 The predefined architecture sizes are available in `src.ann.architecture.ARCHITECTURES`. Pass a single hidden activation name to use it for every hidden layer, or a sequence such as `("relu", "tanh")` for a multi-hidden-layer network. Parameter vectors store each layer's weights followed by its biases, from input to output.
+
+## Student Details
+
+- **Student Name:** Khazi Mohammed Maazuddin
+- **Student ID:** [H00536161]
+- **University:** Heriot-Watt University Dubai
+- **Programme:** MSc Artificial Intelligence
