@@ -16,6 +16,7 @@ env/
 .coverage
 htmlcov/
 tests
+Examples
 
 # IDE settings
 .vscode/
