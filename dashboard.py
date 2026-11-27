@@ -169,6 +169,10 @@ def show_data_tab(
         st.plotly_chart(fig, width="stretch", config={"displaylogo": False})
 
     st.markdown("#### Feature distributions")
+    st.markdown("Analyse distribution across each attribute field:")
+
+    st.dataframe(data.drop(columns="source_row_index").describe().T, width="stretch")
+    st.markdown("Compare entropy across features with the dropdown below:")
     selected_feature = st.selectbox("Feature", FEATURES, key="eda_feature")
     fig = px.histogram(
         data,
@@ -185,9 +189,6 @@ def show_data_tab(
     chart_layout(fig, 390)
     fig.update_layout(yaxis_title="Examples")
     st.plotly_chart(fig, width="stretch", config={"displaylogo": False})
-
-    st.dataframe(data.drop(columns="source_row_index").describe().T, width="stretch")
-
 
 def make_model_frame(results: list[dict]) -> pd.DataFrame:
     rows = []
@@ -617,11 +618,7 @@ def show_shared_comparison(experiment: dict, raw: pd.DataFrame, data_digest: str
             "ROC AUC": "{:.4f}", "Brier score": "{:.6g}",
         }), width="stretch", hide_index=True,
     )
-    st.caption(
-        "Balanced accuracy gives both classes equal weight. Precision/recall/F1 describe Class 1; "
-        "undefined precision is shown as 0. Brier score measures probability error (lower is better). "
-        "Perfect accuracy on this sample does not establish perfect generalisation or calibration."
-    )
+    
     bars = summary_frame.melt(
         id_vars="Model", value_vars=["Accuracy", "Balanced accuracy", "F1 (class 1)", "ROC AUC"],
         var_name="Metric", value_name="Score",
@@ -646,13 +643,6 @@ def show_shared_comparison(experiment: dict, raw: pd.DataFrame, data_digest: str
     )
     chart_layout(fig)
     fig.update_xaxes(range=[0, 1])
-    fig.update_layout(title="Confidence by model · same samples")
-    st.plotly_chart(fig, width="stretch", config={"displaylogo": False})
-    st.caption(
-        "Two models can classify the same rows correctly but give different probabilities. "
-        "Class 0 should lie below 0.5 and Class 1 above it. Distance from 0.5 indicates confidence, "
-        "not class imbalance; these histograms do not establish calibration on future data."
-    )
 
     for column, owner in zip(st.columns(2, gap="large"), models):
         with column:
@@ -683,14 +673,6 @@ def show_shared_comparison(experiment: dict, raw: pd.DataFrame, data_digest: str
     st.markdown("### Selection protocol and training settings")
     config = experiment["best_config"]
     selected = metadata["selected"]
-    st.write(
-        f"Maazuddin: {len(metadata['candidates'])} existing profiles, "
-        f"{metadata['fold_count']} stratified development folds, "
-        f"optimizer seeds {metadata['search_seeds']} in each fold. "
-        f"Selection: {metadata['selection']} Final restart chosen by training accuracy only; "
-        f"seed {metadata['selected_final_seed']}. Fold scalers use fold-training rows only; "
-        "final scalers use development rows only. Both use Riddhi's saved split and fold seeds."
-    )
     st.dataframe(pd.DataFrame([
         {
             "Model": "Riddhi", "Training objective": "BCE + weight-only L2",
@@ -937,14 +919,6 @@ def show_pso_equations(experiment: dict, maazuddin: dict) -> None:
                 "result bundles to compare newly measured results."
             )
         velocity_limit = 2 * config["bound"] * config["velocity_fraction"]
-        st.caption(
-            "Each active random multiplier is an independent Uniform(0, 1) draw per coordinate "
-            "and update, scaled by its coefficient. The informant target is the lowest-loss "
-            "personal best among the selected informants. "
-            f"The implemented velocity is then clipped to ±{velocity_limit:g}; positions "
-            f"are clipped to ±{config['bound']:g}, with velocity zeroed at clipped coordinates. "
-            "The objective is training binary cross-entropy plus an L2 weight penalty (lower is better)."
-        )
     with right:
         st.markdown("##### Maazuddin · informant-based PSO")
         st.latex(
@@ -970,13 +944,7 @@ def show_pso_equations(experiment: dict, maazuddin: dict) -> None:
             "- Ranges describe differences across saved configurations, not a decrease over iterations. "
             "All four configured weights remain fixed within each run; only the random draws change."
         )
-        st.caption(
-            "b, c and d are independent draws per coordinate and update. The informant target "
-            "is the best personal-best position among the selected informants. "
-            "Bounds initialise the particles; this implementation does not clamp their later "
-            "positions or velocities. It maximises training classification accuracy."
-        )
-
+        
     st.markdown("#### Which knowledge receives more weight?")
     expected = pd.DataFrame(
         [
@@ -1011,14 +979,6 @@ def show_pso_equations(experiment: dict, maazuddin: dict) -> None:
     )
     chart_layout(fig, 340)
     st.plotly_chart(fig, width="stretch", config={"displaylogo": False})
-    st.caption(
-        "The expected random multiplier for weight a is a/2. Riddhi's bars show the saved run. "
-        "Maazuddin's bars mark the midpoint of the saved minimum–maximum expected multipliers; "
-        "error bars show that full range across configurations, not uncertainty or a training schedule. "
-        "A midpoint need not be a setting used in any run. "
-        "These bars are coefficient comparisons, not measured particle movements or percentages. "
-        "The inertia weight is separate: it carries existing velocity, not a particular knowledge source."
-    )
     st.markdown(
         "**Riddhi's saved coefficient settings:**\n"
         f"- **Inertia weight:** w decreases from **{start:g}** to **{end:g}**.\n"
@@ -1050,19 +1010,6 @@ def show_pso_equations(experiment: dict, maazuddin: dict) -> None:
         "- **Social emphasis:** cognitive weight β = **0.75**, social weight γ = **1.125**, "
         "global weight δ = **1.125**. Combined social + global weights are three times the cognitive weight.\n"
         "- The architecture, activation, budget and pilot groups use the balanced coefficients."
-    )
-    with st.expander("All Maazuddin PSO configurations"):
-        st.caption(
-            "Every saved configuration is listed together. Default informant counts are resolved "
-            "to min(3, particles). Coefficients do not decrease during a run."
-        )
-        st.dataframe(profile_frame, width="stretch", hide_index=True)
-    st.info(
-        "Larger coefficients do not guarantee larger actual movements: each term also depends "
-        "on a fresh random draw and the distance/direction to its target. Terms can reinforce or "
-        "cancel one another; the informant and global bests may coincide. "
-        "The saved artifacts do not contain per-particle term histories, so this is an equation "
-        "and settings comparison, not a claim about observed influence."
     )
 
 
@@ -1140,12 +1087,6 @@ def show_pso_tab(experiment: dict, model: dict[str, np.ndarray], maazuddin: dict
         )
 
     show_pso_equations(experiment, maazuddin)
-
-    st.info(
-        "Going further: the decreasing inertia schedule transitions from broader exploration "
-        "toward finer search. The experiment also compares activation functions and network depth "
-        "under repeated cross-validation, then uses a held-out test split once for the selected model."
-    )
 
 
 def main() -> None:
