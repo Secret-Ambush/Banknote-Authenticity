@@ -16,3 +16,10 @@ Use this file to maintain an accurate record of AI assistance for this coursewor
 - Review all generated material for correctness and compliance before submission.
 - Record substantive changes you make, tests you run, and any prompts or assistance relevant to your institution's policy.
 - Do not state that all code was manually written if AI assistance was used.
+
+## Student Details
+
+- **Student Name:** Khazi Mohammed Maazuddin
+- **Student ID:** [H00536161]
+- **University:** Heriot-Watt University Dubai
+- **Programme:** MSc Artificial Intelligence
