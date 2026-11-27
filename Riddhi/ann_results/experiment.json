@@ -2,8 +2,8 @@
   "owner": "Riddhi",
   "source_notebook": "ann.ipynb",
   "data_sha256": "c276b8f8d9bd9b7f1be911873b8139aaecf82b3114e4d0bf75c06af6defeeb5f",
-  "python": "3.14.3",
-  "numpy": "2.5.4",
+  "python": "3.14.7",
+  "numpy": "2.5.5",
   "duplicate_policy": "Remove exact duplicate rows before splitting; retain near duplicates.",
   "split_seed": 2026,
   "fold_seed": 31415,
@@ -123,7 +123,7 @@
           "evaluations": 5792
         }
       ],
-      "seconds": 1.4854075830007787
+      "seconds": 1.477290750015527
     },
     {
       "config": {
@@ -202,7 +202,7 @@
           "evaluations": 5792
         }
       ],
-      "seconds": 1.268841083998268
+      "seconds": 1.0989910420030355
     },
     {
       "config": {
@@ -281,7 +281,7 @@
           "evaluations": 5792
         }
       ],
-      "seconds": 2.7287559590040473
+      "seconds": 2.604437916947063
     },
     {
       "config": {
@@ -360,7 +360,7 @@
           "evaluations": 5792
         }
       ],
-      "seconds": 1.8016284580007778
+      "seconds": 1.6205261670402251
     },
     {
       "config": {
@@ -439,7 +439,7 @@
           "evaluations": 5792
         }
       ],
-      "seconds": 1.2260441670005093
+      "seconds": 1.0278723749797791
     },
     {
       "config": {
@@ -518,7 +518,7 @@
           "evaluations": 5792
         }
       ],
-      "seconds": 4.358526500000153
+      "seconds": 4.377720666001551
     },
     {
       "config": {
@@ -597,7 +597,7 @@
           "evaluations": 5792
         }
       ],
-      "seconds": 2.7608832500045537
+      "seconds": 2.4986527909641154
     },
     {
       "config": {
@@ -676,7 +676,7 @@
           "evaluations": 5792
         }
       ],
-      "seconds": 1.8462390420027077
+      "seconds": 1.3211024579941295
     },
     {
       "config": {
@@ -755,7 +755,7 @@
           "evaluations": 5792
         }
       ],
-      "seconds": 6.93498004200228
+      "seconds": 6.355972292018123
     },
     {
       "config": {
@@ -836,7 +836,7 @@
           "evaluations": 5792
         }
       ],
-      "seconds": 2.723609625005338
+      "seconds": 2.42188358301064
     },
     {
       "config": {
@@ -917,7 +917,7 @@
           "evaluations": 5792
         }
       ],
-      "seconds": 1.8049694169967552
+      "seconds": 1.4778100829571486
     },
     {
       "config": {
@@ -998,7 +998,7 @@
           "evaluations": 5792
         }
       ],
-      "seconds": 6.647893082998053
+      "seconds": 6.2836405410198495
     },
     {
       "config": {
@@ -1079,7 +1079,7 @@
           "evaluations": 5792
         }
       ],
-      "seconds": 2.4232779589947313
+      "seconds": 2.2931665419600904
     },
     {
       "config": {
@@ -1160,7 +1160,7 @@
           "evaluations": 5792
         }
       ],
-      "seconds": 2.0891678750049323
+      "seconds": 1.8715877499780618
     }
   ],
   "refinement_results": [
@@ -1241,7 +1241,7 @@
           "evaluations": 16848
         }
       ],
-      "seconds": 5.103605624994088
+      "seconds": 3.890813625010196
     },
     {
       "config": {
@@ -1320,7 +1320,7 @@
           "evaluations": 16848
         }
       ],
-      "seconds": 5.514873291002004
+      "seconds": 3.971854082948994
     },
     {
       "config": {
@@ -1399,7 +1399,7 @@
           "evaluations": 16848
         }
       ],
-      "seconds": 5.419978666002862
+      "seconds": 4.016334040963557
     },
     {
       "config": {
@@ -1478,7 +1478,7 @@
           "evaluations": 16848
         }
       ],
-      "seconds": 3.890757917004521
+      "seconds": 2.946384707989637
     },
     {
       "config": {
@@ -1557,7 +1557,7 @@
           "evaluations": 16848
         }
       ],
-      "seconds": 4.174575500001083
+      "seconds": 3.0750581250176765
     },
     {
       "config": {
@@ -1636,7 +1636,7 @@
           "evaluations": 16848
         }
       ],
-      "seconds": 3.969869791995734
+      "seconds": 3.3569867920014076
     },
     {
       "config": {
@@ -1717,7 +1717,7 @@
           "evaluations": 16848
         }
       ],
-      "seconds": 5.845693542003573
+      "seconds": 4.468773084052373
     },
     {
       "config": {
@@ -1798,7 +1798,7 @@
           "evaluations": 16848
         }
       ],
-      "seconds": 5.690019833004044
+      "seconds": 4.449147166975308
     },
     {
       "config": {
@@ -1879,7 +1879,7 @@
           "evaluations": 16848
         }
       ],
-      "seconds": 5.629030042000522
+      "seconds": 4.4728300829883665
     }
   ],
   "test_report": {
