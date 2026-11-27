@@ -1,7 +1,14 @@
 {
   "owner": "Riddhi",
   "source": "ann.ipynb",
-  "protocol": "Repeated stratified 3-fold CV; one locked final test holdout.",
+  "source_artifact": "ann_results/experiment.json",
+  "protocol": {
+    "architecture_metric": "Mean validation accuracy over repeated stratified 3-fold cross-validation",
+    "repeats": 2,
+    "folds": 3,
+    "test_set": "One locked holdout, reported only for the selected final architecture",
+    "duplicate_policy": "Remove exact duplicate rows before splitting; retain near duplicates."
+  },
   "experiment": {
     "owner": "Riddhi",
     "source_notebook": "ann.ipynb",

@@ -1,7 +1,7 @@
 {
   "data_sha256": "c276b8f8d9bd9b7f1be911873b8139aaecf82b3114e4d0bf75c06af6defeeb5f",
   "source_hashes": {
-    "experiment.json": "04be9ebb51503088e007c2b032fe8e673f0f53aca403960ddf094079c24a2825",
+    "experiment.json": "f654d21af8cbd2e75ed556f5cdf3bd9592e974a0be22a597d155119eb2045b1f",
     "best_model.npz": "b7bae814c83698e8e6ff45eefc3cb58fb31770fd25ac535cb5b70dd32020e531",
     "maazuddin_shared_model.npz": "5da58d8acb3db2c023e90e30742d02e2604b5a316eb4a6d0eb7ea6826edafe0c"
   },
